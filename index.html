@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grievance Portal – GF Edition</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: #ffe6f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      height: 100vh;
+    }
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin-top: 50px;
+      background: #fff0f5;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #d63384;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #ff66b2;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e055a0;
+    }
+    .complaint {
+      background: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      border-left: 5px solid #ff69b4;
+    }
+    .login-box {
+      display: none;
+    }
+    .error {
+      color: red;
+      text-align: center;
+    }
+    .logout {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="loginForm">
+      <h1>Login to Complain 💅</h1>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+      <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="portal" style="display:none;">
+      <div class="logout">
+        <button onclick="logout()">Logout</button>
+      </div>
+      <h1>My Grievances 😤</h1>
+      <input type="text" id="title" placeholder="Complaint Title">
+      <textarea id="description" placeholder="What did he do this time?..." rows="4"></textarea>
+      <button onclick="addComplaint()">Add Complaint</button>
+      <div id="complaintsList"></div>
+    </div>
+  </div>
+
+  <script>
+    const USERNAME = "myqueen";
+    const PASSWORD = "notlistening";
+
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      if (user === USERNAME && pass === PASSWORD) {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("portal").style.display = "block";
+        loadComplaints();
+      } else {
+        document.getElementById("errorMsg").innerText = "Wrong credentials. Try again, Your Highness.";
+      }
+    }
+
+    function logout() {
+      document.getElementById("portal").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("errorMsg").innerText = "";
+    }
+
+    function addComplaint() {
+      const title = document.getElementById("title").value;
+      const desc = document.getElementById("description").value;
+
+      if (!title || !desc) {
+        alert("Please fill in both fields. You know the rules.");
+        return;
+      }
+
+      const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+      complaints.push({ title, desc });
+      localStorage.setItem("complaints", JSON.stringify(complaints));
+
+      document.getElementById("title").value = "";
+      document.getElementById("description").value = "";
+      loadComplaints();
+    }
+
+    function loadComplaints() {
+      const list = document.getElementById("complaintsList");
+      list.innerHTML = "";
+      const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+      complaints.forEach((c, i) => {
+        const div = document.createElement("div");
+        div.className = "complaint";
+        div.innerHTML = `
+          <strong>${c.title}</strong>
+          <p>${c.desc}</p>
+          <button onclick="deleteComplaint(${i})">Delete</button>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function deleteComplaint(index) {
+      const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+      complaints.splice(index, 1);
+      localStorage.setItem("complaints", JSON.stringify(complaints));
+      loadComplaints();
+    }
+  </script>
+</body>
+</html>
