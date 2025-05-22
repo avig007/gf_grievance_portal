@@ -28,7 +28,7 @@
       const rp = localStorage.getItem("gfPass");
 
       if (u === ru && p === rp) {
-        window.location.href = "portal.html";
+        window.location.href = "choose.html";
       } else {
         document.getElementById("error").innerText = "❌ Wrong credentials. Are you even my GF?";
       }
