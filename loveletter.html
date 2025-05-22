@@ -2,106 +2,139 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>💌 Send a Love Letter</title>
+  <title>💌 Submit a Love Letter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: cursive;
-      background-color: #ffe4e1;
-      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      background-image: url('https://raw.githubusercontent.com/avig007/gf_grievance_portal/60ad5ae33b2c19ba353eecfe5b604ad019c78480/IMG_1129.JPG');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #fff;
       padding: 40px;
+      max-width: 700px;
+      margin: auto;
+      backdrop-filter: blur(6px);
     }
-    textarea, select, input[type="file"] {
-      width: 80%;
-      margin-top: 10px;
-      font-size: 16px;
-      border-radius: 8px;
-      padding: 10px;
-    }
-    textarea {
-      height: 150px;
-    }
-    button {
-      background-color: #ff69b4;
-      color: white;
-      padding: 10px 25px;
-      border: none;
-      margin-top: 20px;
-      font-size: 16px;
-      border-radius: 8px;
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 42px;
+      color: #ff69b4;
+      text-align: center;
+      margin-bottom: 20px;
     }
     label {
-      display: block;
-      margin-top: 20px;
       font-weight: bold;
-      color: #d63384;
+      margin-top: 12px;
+      display: block;
+      font-size: 16px;
+    }
+    textarea, select, input[type="file"], input[type="text"], button {
+      width: 100%;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      background-color: #ff1493;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #e60073;
+    }
+    .question {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 12px;
     }
   </style>
 </head>
 <body>
-  <h1>💌 Write Your Love Letter</h1>
-  <p>Let your royal affection (and spicy secrets) flow...</p>
 
-  <textarea id="loveText" placeholder="Dear darling, you're the moon to my night..."></textarea>
+  <h1>💌 Spill Your Sassy Secrets</h1>
 
-  <label for="photoUpload">📸 Upload a steamy photo (JPG/PNG):</label>
-  <input type="file" id="photoUpload" accept="image/*">
+  <form id="loveForm" action="http://localhost:3000/loveletter" method="POST" enctype="multipart/form-data">
+    
+    <label for="username">Your Sizzling Name:</label>
+    <input type="text" name="username" id="username" required>
 
-  <label for="fileUpload">📄 Upload a handwritten love letter (PDF/DOC):</label>
-  <input type="file" id="fileUpload" accept=".pdf,.doc,.docx,.txt">
+    <label for="loveletter">Your Tempting Love Letter:</label>
+    <textarea name="loveletter" id="loveletter" rows="6" placeholder="Whisper your desires here..." required></textarea>
 
-  <label for="kinkyQ">💋 What is the next dagte night going to look like?</label>
-  <select id="kinkyQ">
-    <option value="">-- Choose --</option>
-    <option value="candlelight">Candlelight & soft jazz 🎷</option>
-    <option value="wild">Wild & spontaneous 🔥</option>
-    <option value="roleplay">A little roleplay never hurts 😈</option>
-    <option value="surprise">Surprise me 😏</option>
-  </select>
+    <label for="kinkyQuestion">What’s your favorite flavor of romance?</label>
+    <select name="kinkyQuestion" id="kinkyQuestion" required>
+      <option value="" disabled selected>Choose your kink level</option>
+      <option value="💋 Soft & Sensual">💋 Soft & Sensual</option>
+      <option value="🔥 Slightly Wicked">🔥 Slightly Wicked</option>
+      <option value="🍓 Blindfolds & Whispers">🍓 Blindfolds & Whispers</option>
+      <option value="🖤 Total Tease Mode">🖤 Total Tease Mode</option>
+    </select>
 
-  <br><button onclick="sendLove()">Send Love</button>
+    <div class="question">
+      <label for="q1">💄 What’s your favorite kind of foreplay?</label>
+      <select name="q1" id="q1">
+        <option value="Candle massage">Candle massage</option>
+        <option value="Slow kisses">Slow kisses</option>
+        <option value="Roleplay">Roleplay</option>
+        <option value="Dirty talk">Dirty talk</option>
+      </select>
+    </div>
 
-  <p id="response" style="margin-top:20px;"></p>
+    <div class="question">
+      <label for="q2">🖤 Your safe word (just in case 😉)?</label>
+      <input type="text" name="q2" id="q2" placeholder="Enter something cute or spicy">
+    </div>
+
+    <div class="question">
+      <label for="q3">🧣 Pick your secret weapon:</label>
+      <select name="q3" id="q3">
+        <option value="Silk scarf">Silk scarf</option>
+        <option value="Whipped cream">Whipped cream</option>
+        <option value="Ice cube">Ice cube</option>
+        <option value="Feather">Feather</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label for="q4">🍷 Do you prefer sweet talk or spicy dares?</label>
+      <select name="q4" id="q4">
+        <option value="Sweet talk all the way">Sweet talk all the way</option>
+        <option value="Spicy dares are thrilling">Spicy dares are thrilling</option>
+        <option value="Both... depending on the night">Both... depending on the night</option>
+      </select>
+    </div>
+
+    <label for="photos">Upload Your Steamy Shots (max 15):</label>
+    <input type="file" name="photos[]" id="photos" accept="image/*" multiple>
+
+    <label for="letterFile">Attach a Naughty Note (PDF/DOC) (optional):</label>
+    <input type="file" name="letterFile" id="letterFile" accept=".pdf,.doc,.docx,.txt">
+
+    <button type="submit">Send My Seduction 💘</button>
+  </form>
 
   <script>
-    async function sendLove() {
-      const loveNote = document.getElementById("loveText").value.trim();
-      const photo = document.getElementById("photoUpload").files[0];
-      const file = document.getElementById("fileUpload").files[0];
-      const kinkyAnswer = document.getElementById("kinkyQ").value;
-      const username = localStorage.getItem("gfUser") || "Unknown";
-
-      if (!loveNote && !file && !photo) {
-        document.getElementById("response").innerText = "💔 At least send me *something* steamy!";
-        return;
+    document.getElementById('photos').addEventListener('change', function(event) {
+      const files = event.target.files;
+      if (files.length > 15) {
+        alert("You can upload a maximum of 15 images.");
+        event.target.value = ""; // Clear selected files
       }
-
-      const formData = new FormData();
-      formData.append("username", username);
-      formData.append("loveletter", loveNote);
-      formData.append("kinkyQuestion", kinkyAnswer);
-      if (photo) formData.append("photo", photo);
-      if (file) formData.append("letterFile", file);
-
-      try {
-        const res = await fetch("https://your-backend-endpoint.com/loveletter", {
-          method: "POST",
-          body: formData
-        });
-
-        const data = await res.json();
-        if (data.status === "success") {
-          document.getElementById("response").innerText = "💘 Love letter and files sent successfully!";
-          document.getElementById("loveText").value = "";
-          document.getElementById("photoUpload").value = "";
-          document.getElementById("fileUpload").value = "";
-          document.getElementById("kinkyQ").value = "";
-        } else {
-          document.getElementById("response").innerText = "❗ Server error. Try again!";
-        }
-      } catch (err) {
-        document.getElementById("response").innerText = "⚠️ Network error. Maybe the passion broke the internet?";
-      }
-    }
+    });
   </script>
+
 </body>
 </html>
