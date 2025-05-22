@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💌 Send a Love Letter</title>
+  <style>
+    body {
+      font-family: cursive;
+      background-color: #ffe4e1;
+      text-align: center;
+      padding: 40px;
+    }
+    textarea, select, input[type="file"] {
+      width: 80%;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    textarea {
+      height: 150px;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 10px 25px;
+      border: none;
+      margin-top: 20px;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #d63384;
+    }
+  </style>
+</head>
+<body>
+  <h1>💌 Write Your Love Letter</h1>
+  <p>Let your royal affection (and spicy secrets) flow...</p>
+
+  <textarea id="loveText" placeholder="Dear darling, you're the moon to my night..."></textarea>
+
+  <label for="photoUpload">📸 Upload a steamy photo (JPG/PNG):</label>
+  <input type="file" id="photoUpload" accept="image/*">
+
+  <label for="fileUpload">📄 Upload a handwritten love letter (PDF/DOC):</label>
+  <input type="file" id="fileUpload" accept=".pdf,.doc,.docx,.txt">
+
+  <label for="kinkyQ">💋 What is the next dagte night going to look like?</label>
+  <select id="kinkyQ">
+    <option value="">-- Choose --</option>
+    <option value="candlelight">Candlelight & soft jazz 🎷</option>
+    <option value="wild">Wild & spontaneous 🔥</option>
+    <option value="roleplay">A little roleplay never hurts 😈</option>
+    <option value="surprise">Surprise me 😏</option>
+  </select>
+
+  <br><button onclick="sendLove()">Send Love</button>
+
+  <p id="response" style="margin-top:20px;"></p>
+
+  <script>
+    async function sendLove() {
+      const loveNote = document.getElementById("loveText").value.trim();
+      const photo = document.getElementById("photoUpload").files[0];
+      const file = document.getElementById("fileUpload").files[0];
+      const kinkyAnswer = document.getElementById("kinkyQ").value;
+      const username = localStorage.getItem("gfUser") || "Unknown";
+
+      if (!loveNote && !file && !photo) {
+        document.getElementById("response").innerText = "💔 At least send me *something* steamy!";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("loveletter", loveNote);
+      formData.append("kinkyQuestion", kinkyAnswer);
+      if (photo) formData.append("photo", photo);
+      if (file) formData.append("letterFile", file);
+
+      try {
+        const res = await fetch("https://your-backend-endpoint.com/loveletter", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await res.json();
+        if (data.status === "success") {
+          document.getElementById("response").innerText = "💘 Love letter and files sent successfully!";
+          document.getElementById("loveText").value = "";
+          document.getElementById("photoUpload").value = "";
+          document.getElementById("fileUpload").value = "";
+          document.getElementById("kinkyQ").value = "";
+        } else {
+          document.getElementById("response").innerText = "❗ Server error. Try again!";
+        }
+      } catch (err) {
+        document.getElementById("response").innerText = "⚠️ Network error. Maybe the passion broke the internet?";
+      }
+    }
+  </script>
+</body>
+</html>
