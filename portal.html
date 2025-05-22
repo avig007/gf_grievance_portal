@@ -7,20 +7,19 @@
       font-family: sans-serif;
       background-color: #fdf3f3;
       padding: 20px;
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
     }
     h1 {
       color: #d63384;
     }
-    .rating img {
-      width: 50px;
-      margin: 5px;
+    .rating span {
+      font-size: 30px;
       cursor: pointer;
-      opacity: 0.6;
+      margin: 5px;
+      opacity: 0.5;
     }
-    .rating img.selected {
-      border: 2px solid #d63384;
+    .rating span.selected {
       opacity: 1;
     }
     .file-preview {
@@ -36,6 +35,11 @@
       border-radius: 8px;
       cursor: pointer;
     }
+    select, textarea, input[type="file"] {
+      margin-top: 8px;
+      margin-bottom: 12px;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -43,27 +47,45 @@
   <h1>📝 GF Grievance Portal</h1>
   <p>Welcome, Her Highness. Kindly submit your royal complaints below.</p>
 
-  <label>Complaint:</label><br>
-  <textarea id="grievance" rows="5" cols="50"></textarea><br><br>
+  <label>Royal Complaint:</label>
+  <textarea id="grievance" rows="5" placeholder="Speak your heart, Queen."></textarea>
 
   <label>Category:</label><br>
   <input type="radio" name="category" value="Forgot Anniversary"> Forgot Anniversary<br>
   <input type="radio" name="category" value="Late Reply"> Late Reply<br>
-  <input type="radio" name="category" value="Didn't Call"> Didn't Call<br>
-  <input type="radio" name="category" value="Other"> Other<br><br>
+  <input type="radio" name="category" value="Didn’t Call"> Didn’t Call<br>
+  <input type="radio" name="category" value="Didn’t Notice New Dress"> Didn’t Notice New Dress<br>
+  <input type="radio" name="category" value="Other"> Other<br>
 
-  <label>Severity Rating:</label>
-  <div class="rating">
-    <img src="https://i.imgur.com/NyrrYON.png" data-rate="1" alt="1">
-    <img src="https://i.imgur.com/1nKjLh1.png" data-rate="2" alt="2">
-    <img src="https://i.imgur.com/fM2sKfi.png" data-rate="3" alt="3">
-    <img src="https://i.imgur.com/xuKcfmA.png" data-rate="4" alt="4">
-    <img src="https://i.imgur.com/ycLOs7C.png" data-rate="5" alt="5">
+  <label>Severity Rating (Emoji Style):</label>
+  <div class="rating" id="emojiRating">
+    <span data-rate="1">😐</span>
+    <span data-rate="2">😤</span>
+    <span data-rate="3">😡</span>
+    <span data-rate="4">🤬</span>
+    <span data-rate="5">💣</span>
   </div>
-  <input type="hidden" id="rating" value="">
+  <input type="hidden" id="rating">
 
-  <label>Upload Evidence:</label><br>
-  <input type="file" id="imageUpload" accept="image/*"><br>
+  <label>Frequency of Offense:</label>
+  <select id="frequency">
+    <option value="Once">Once</option>
+    <option value="Sometimes">Sometimes</option>
+    <option value="Often">Often</option>
+    <option value="Every Damn Time">Every Damn Time</option>
+  </select>
+
+  <label>Preferred Apology Method:</label>
+  <select id="apology">
+    <option value="Chocolate & Flowers">Chocolate & Flowers</option>
+    <option value="Public Apology">Public Apology</option>
+    <option value="Love Letter">Love Letter</option>
+    <option value="Shopping Spree">Shopping Spree</option>
+    <option value="Begging + Puppy Eyes">Begging + Puppy Eyes</option>
+  </select>
+
+  <label>Upload Evidence (Screenshot/Photo):</label>
+  <input type="file" id="imageUpload" accept="image/*">
   <img id="preview" class="file-preview"><br>
 
   <button onclick="submitComplaint()">Submit Complaint 🚨</button>
@@ -71,69 +93,68 @@
   <p id="response" style="margin-top:20px;"></p>
 
   <script>
-    // Handle rating selection
-    const ratingImages = document.querySelectorAll(".rating img");
-    ratingImages.forEach(img => {
-      img.addEventListener("click", () => {
-        ratingImages.forEach(i => i.classList.remove("selected"));
-        img.classList.add("selected");
-        document.getElementById("rating").value = img.getAttribute("data-rate");
+    // Emoji rating selection
+    const emojiRating = document.querySelectorAll("#emojiRating span");
+    emojiRating.forEach(span => {
+      span.addEventListener("click", () => {
+        emojiRating.forEach(s => s.classList.remove("selected"));
+        span.classList.add("selected");
+        document.getElementById("rating").value = span.dataset.rate;
       });
     });
 
-    // Handle image preview and base64 conversion
-    let uploadedImage = "";
-    document.getElementById("imageUpload").addEventListener("change", function() {
-      const file = this.files[0];
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        uploadedImage = e.target.result;
-        document.getElementById("preview").src = uploadedImage;
-      }
-      if (file) {
-        reader.readAsDataURL(file);
+    // Handle image preview
+    let selectedFile = null;
+    document.getElementById("imageUpload").addEventListener("change", function () {
+      selectedFile = this.files[0];
+      if (selectedFile) {
+        const reader = new FileReader();
+        reader.onload = e => document.getElementById("preview").src = e.target.result;
+        reader.readAsDataURL(selectedFile);
       }
     });
 
-    function submitComplaint() {
-      const message = document.getElementById("grievance").value;
+    async function submitComplaint() {
+      const complaint = document.getElementById("grievance").value;
       const category = document.querySelector("input[name='category']:checked");
-      const username = localStorage.getItem("gfUser") || "Unknown";
       const rating = document.getElementById("rating").value;
+      const frequency = document.getElementById("frequency").value;
+      const apology = document.getElementById("apology").value;
+      const username = localStorage.getItem("gfUser") || "Her Highness";
 
-      if (!message || !category || !rating) {
+      if (!complaint || !category || !rating) {
         document.getElementById("response").innerText = "😤 Fill all the royal fields!";
         return;
       }
 
-      const payload = {
-        username: username,
-        complaint: message,
-        category: category.value,
-        rating: rating,
-        image: uploadedImage || ""
-      };
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("complaint", complaint);
+      formData.append("category", category.value);
+      formData.append("rating", rating);
+      formData.append("frequency", frequency);
+      formData.append("apology", apology);
+      if (selectedFile) {
+        formData.append("evidence", selectedFile);
+      }
 
-      fetch("https://script.google.com/macros/s/AKfycbw1x3Icj-kb3u6vvnN89AVWKWCTyhSJ7V727MOiFn1dl8bcV1hmZPBBhukQGOmxhs7-GA/exec", {
+      const res = await fetch("http://localhost:3000/grievance", {
         method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(res => res.json())
-        .then(data => {
-          if (data.status === "success") {
-            document.getElementById("response").innerText = "📬 Royal complaint submitted!";
-            document.getElementById("grievance").value = "";
-            ratingImages.forEach(i => i.classList.remove("selected"));
-            document.getElementById("rating").value = "";
-            document.getElementById("preview").src = "";
-          } else {
-            document.getElementById("response").innerText = "🚨 Oops, something went wrong!";
-          }
-        });
+        body: formData
+      });
+
+      const result = await res.json();
+      if (result.status === "success") {
+        document.getElementById("response").innerText = "📬 Complaint filed successfully!";
+        document.getElementById("grievance").value = "";
+        emojiRating.forEach(s => s.classList.remove("selected"));
+        document.getElementById("rating").value = "";
+        document.getElementById("preview").src = "";
+        document.getElementById("imageUpload").value = "";
+      } else {
+        document.getElementById("response").innerText = "🚨 Submission failed. Try again!";
+      }
     }
   </script>
-
 </body>
 </html>
