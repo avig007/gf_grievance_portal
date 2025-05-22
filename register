@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | GF Grievance Portal</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background: #fff0f5; padding: 50px; }
+    input { padding: 10px; margin: 10px; width: 300px; }
+    button { padding: 10px 20px; background: #ff69b4; color: white; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>👑 Register to Rule the Grievance Kingdom</h1>
+  <input id="regUser" placeholder="Create username"><br>
+  <input id="regPass" placeholder="Create password" type="password"><br>
+  <button onclick="register()">Register</button>
+
+  <p id="message"></p>
+
+  <script>
+    function register() {
+      const user = document.getElementById('regUser').value;
+      const pass = document.getElementById('regPass').value;
+      if (!user || !pass) {
+        document.getElementById("message").innerText = "🧚‍♀️ Fill both fields, royal one!";
+        return;
+      }
+      localStorage.setItem("gfUser", user);
+      localStorage.setItem("gfPass", pass);
+      document.getElementById("message").innerHTML = "👸 You're all set! Now <a href='index.html'>login</a> to submit your royal complaints.";
+    }
+  </script>
+</body>
+</html>
