@@ -1,35 +1,139 @@
-<script>
-  function submitComplaint() {
-    const message = document.getElementById("grievance").value;
-    const category = document.querySelector("input[name='category']:checked");
-    const username = localStorage.getItem("gfUser") || "Unknown";
-
-    if (!message || !category) {
-      document.getElementById("response").innerText = "😤 You missed something, Queen!";
-      return;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GF Grievance Portal</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #fdf3f3;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
     }
+    h1 {
+      color: #d63384;
+    }
+    .rating img {
+      width: 50px;
+      margin: 5px;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+    .rating img.selected {
+      border: 2px solid #d63384;
+      opacity: 1;
+    }
+    .file-preview {
+      margin-top: 10px;
+      max-height: 150px;
+    }
+    button {
+      margin-top: 15px;
+      background-color: #d63384;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
 
-    const payload = {
-      username: username,
-      complaint: message,
-      category: category.value
-    };
+  <h1>📝 GF Grievance Portal</h1>
+  <p>Welcome, Her Highness. Kindly submit your royal complaints below.</p>
 
-    fetch("https://script.google.com/macros/s/AKfycbw1x3Icj-kb3u6vvnN89AVWKWCTyhSJ7V727MOiFn1dl8bcV1hmZPBBhukQGOmxhs7-GA/exec", {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(res => res.json())
-      .then(data => {
-        if (data.status === "success") {
-          document.getElementById("response").innerHTML = "📬 Complaint submitted to royal archives!";
-          document.getElementById("grievance").value = "";
-          category.checked = false;
-        } else {
-          document.getElementById("response").innerText = "🚨 Something went wrong!";
-        }
+  <label>Complaint:</label><br>
+  <textarea id="grievance" rows="5" cols="50"></textarea><br><br>
+
+  <label>Category:</label><br>
+  <input type="radio" name="category" value="Forgot Anniversary"> Forgot Anniversary<br>
+  <input type="radio" name="category" value="Late Reply"> Late Reply<br>
+  <input type="radio" name="category" value="Didn't Call"> Didn't Call<br>
+  <input type="radio" name="category" value="Other"> Other<br><br>
+
+  <label>Severity Rating:</label>
+  <div class="rating">
+    <img src="https://i.imgur.com/NyrrYON.png" data-rate="1" alt="1">
+    <img src="https://i.imgur.com/1nKjLh1.png" data-rate="2" alt="2">
+    <img src="https://i.imgur.com/fM2sKfi.png" data-rate="3" alt="3">
+    <img src="https://i.imgur.com/xuKcfmA.png" data-rate="4" alt="4">
+    <img src="https://i.imgur.com/ycLOs7C.png" data-rate="5" alt="5">
+  </div>
+  <input type="hidden" id="rating" value="">
+
+  <label>Upload Evidence:</label><br>
+  <input type="file" id="imageUpload" accept="image/*"><br>
+  <img id="preview" class="file-preview"><br>
+
+  <button onclick="submitComplaint()">Submit Complaint 🚨</button>
+
+  <p id="response" style="margin-top:20px;"></p>
+
+  <script>
+    // Handle rating selection
+    const ratingImages = document.querySelectorAll(".rating img");
+    ratingImages.forEach(img => {
+      img.addEventListener("click", () => {
+        ratingImages.forEach(i => i.classList.remove("selected"));
+        img.classList.add("selected");
+        document.getElementById("rating").value = img.getAttribute("data-rate");
       });
-  }
-</script>
+    });
+
+    // Handle image preview and base64 conversion
+    let uploadedImage = "";
+    document.getElementById("imageUpload").addEventListener("change", function() {
+      const file = this.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        uploadedImage = e.target.result;
+        document.getElementById("preview").src = uploadedImage;
+      }
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function submitComplaint() {
+      const message = document.getElementById("grievance").value;
+      const category = document.querySelector("input[name='category']:checked");
+      const username = localStorage.getItem("gfUser") || "Unknown";
+      const rating = document.getElementById("rating").value;
+
+      if (!message || !category || !rating) {
+        document.getElementById("response").innerText = "😤 Fill all the royal fields!";
+        return;
+      }
+
+      const payload = {
+        username: username,
+        complaint: message,
+        category: category.value,
+        rating: rating,
+        image: uploadedImage || ""
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbw1x3Icj-kb3u6vvnN89AVWKWCTyhSJ7V727MOiFn1dl8bcV1hmZPBBhukQGOmxhs7-GA/exec", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => res.json())
+        .then(data => {
+          if (data.status === "success") {
+            document.getElementById("response").innerText = "📬 Royal complaint submitted!";
+            document.getElementById("grievance").value = "";
+            ratingImages.forEach(i => i.classList.remove("selected"));
+            document.getElementById("rating").value = "";
+            document.getElementById("preview").src = "";
+          } else {
+            document.getElementById("response").innerText = "🚨 Oops, something went wrong!";
+          }
+        });
+    }
+  </script>
+
+</body>
+</html>
