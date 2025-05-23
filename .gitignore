@@ -1,0 +1,30 @@
+# Node.js modules
+node_modules/
+
+# Environment secrets
+.env
+secrets/
+credentials.json
+
+# Uploaded or temporary files
+uploads/
+*.log
+*.tmp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+
+# Optional log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Render deploy build folders (if any)
+dist/
+build/

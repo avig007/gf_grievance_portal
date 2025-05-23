@@ -1,0 +1,23 @@
+{
+  "name": "loveletter",
+  "version": "1.0.0",
+  "description": "Express server for love letter and grievance file upload to Google Drive",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "googleapis": "^149.0.0",
+    "multer": "^2.0.0",
+    "open": "^10.1.2"
+  }
+}
