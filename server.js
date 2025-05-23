@@ -6,7 +6,7 @@ const { google } = require('googleapis');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 // Enable CORS and JSON parsing
 app.use(cors());
