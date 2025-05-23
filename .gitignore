@@ -1,10 +1,6 @@
 # Node.js modules
 node_modules/
 
-# Environment secrets
-.env
-credentials.json
-
 # Uploaded or temporary files
 uploads/
 *.log
