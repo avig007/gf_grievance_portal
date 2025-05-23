@@ -55,7 +55,7 @@ async function uploadToDrive(filePath, mimeType, name) {
   return response.data;
 }
 
-// Endpoint to handle form submission
+// Endpoint to handle love letter submissions
 app.post('/loveletter', upload.fields([
   { name: 'photos', maxCount: 15 },
   { name: 'letterFile', maxCount: 1 }
@@ -138,6 +138,63 @@ ${allQ3.join(', ')}
   }
 });
 
+// Endpoint to handle grievance submissions
+app.post('/grievance', upload.single('evidence'), async (req, res) => {
+  try {
+    const {
+      username,
+      complaint,
+      category,
+      rating,
+      frequency,
+      apology
+    } = req.body;
+
+    const evidenceFile = req.file;
+
+    // Save summary
+    const summaryText = `
+💢 Grievance Received 💢
+
+🙋‍♀️ From: ${username}
+📖 Complaint: ${complaint}
+📂 Category: ${category}
+💥 Severity: ${rating}
+🔁 Frequency: ${frequency}
+🙏 Preferred Apology: ${apology}
+    `.trim();
+
+    const grievanceSummaryPath = path.join(__dirname, 'uploads', `grievance-summary-${Date.now()}.txt`);
+    fs.writeFileSync(grievanceSummaryPath, summaryText);
+
+    const uploads = [];
+
+    // Upload evidence image if exists
+    if (evidenceFile) {
+      const uploadedEvidence = await uploadToDrive(evidenceFile.path, evidenceFile.mimetype, evidenceFile.originalname);
+      uploads.push(uploadedEvidence);
+    }
+
+    // Upload grievance summary
+    const uploadedSummary = await uploadToDrive(grievanceSummaryPath, 'text/plain', path.basename(grievanceSummaryPath));
+    uploads.push(uploadedSummary);
+
+    res.json({
+      status: 'success',
+      message: 'Grievance received! 🙇‍♂️',
+      driveLinks: uploads.map(f => f.webViewLink)
+    });
+
+    // Cleanup
+    [evidenceFile?.path, grievanceSummaryPath]
+      .filter(Boolean)
+      .forEach(file => fs.unlink(file, () => {}));
+  } catch (err) {
+    console.error('❌ Grievance Error:', err);
+    res.status(500).json({ status: 'error', message: 'Grievance submission failed.' });
+  }
+});
+
 app.listen(PORT, () => {
-  console.log(`💌 Love Letter Server is running at http://localhost:${PORT}`);
+  console.log(`💌 Love Letter & Grievance Server is running at http://localhost:${PORT}`);
 });
