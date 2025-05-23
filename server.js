@@ -6,7 +6,7 @@ const { google } = require('googleapis');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Enable CORS and JSON parsing
 app.use(cors());
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// 🔒 Replace with your actual Google Drive folder ID
+// 🔒 Your Google Drive folder ID (keep as is)
 const FOLDER_ID = '1c-F4f1MeABONJI1ec3Pm89wRQI2i_1ie';
 
 // Set up Multer storage
@@ -30,14 +30,29 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Google Drive auth setup
+// Prepare Google credentials from environment variables
+const googleCredentials = {
+  type: process.env.GOOGLE_TYPE,
+  project_id: process.env.GOOGLE_PROJECT_ID,
+  private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
+  private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  client_email: process.env.GOOGLE_CLIENT_EMAIL,
+  client_id: process.env.GOOGLE_CLIENT_ID,
+  auth_uri: process.env.GOOGLE_AUTH_URI,
+  token_uri: process.env.GOOGLE_TOKEN_URI,
+  auth_provider_x509_cert_url: process.env.GOOGLE_AUTH_PROVIDER,
+  client_x509_cert_url: process.env.GOOGLE_CLIENT_CERT_URL
+};
+
+// Google Drive auth setup with explicit credentials
 const auth = new google.auth.GoogleAuth({
-  keyFile: 'credentials.json',
+  credentials: googleCredentials,
   scopes: ['https://www.googleapis.com/auth/drive.file']
 });
+
 const drive = google.drive({ version: 'v3', auth });
 
-// Upload a file to Google Drive
+// Upload to Google Drive function remains unchanged
 async function uploadToDrive(filePath, mimeType, name) {
   const fileMetadata = {
     name,
@@ -55,7 +70,7 @@ async function uploadToDrive(filePath, mimeType, name) {
   return response.data;
 }
 
-// Endpoint to handle love letter submissions
+// Love letter submission endpoint remains unchanged
 app.post('/loveletter', upload.fields([
   { name: 'photos', maxCount: 15 },
   { name: 'letterFile', maxCount: 1 }
@@ -138,7 +153,7 @@ ${allQ3.join(', ')}
   }
 });
 
-// Endpoint to handle grievance submissions
+// Grievance submission endpoint remains unchanged
 app.post('/grievance', upload.single('evidence'), async (req, res) => {
   try {
     const {
