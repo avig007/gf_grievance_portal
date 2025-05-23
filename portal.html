@@ -2,10 +2,10 @@
 <html>
 <head>
   <title>GF Grievance Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: #fdf3f3;
       padding: 20px;
       max-width: 700px;
@@ -13,11 +13,11 @@
     }
     h1 {
       color: #d63384;
-      font-family: 'Pacifico', cursive;
+      font-family: 'Dancing Script', cursive;
       font-size: 36px;
     }
     label, select, .rating span {
-      font-family: 'Pacifico', cursive;
+      font-family: 'Dancing Script', cursive;
       font-size: 18px;
       color: #b30059;
     }
@@ -42,13 +42,14 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-family: 'Pacifico', cursive;
+      font-family: 'Dancing Script', cursive;
       font-size: 18px;
     }
     select, textarea, input[type="file"] {
       margin-top: 8px;
       margin-bottom: 12px;
       width: 100%;
+      font-family: 'Poppins', sans-serif;
     }
   </style>
 </head>
@@ -146,7 +147,7 @@
         formData.append("evidence", selectedFile);
       }
 
-      const res = await fetch("http://localhost:3000/grievance", {
+      const res = await fetch("https://gf-grievance-portal-1.onrender.com/grievance", {
         method: "POST",
         body: formData
       });
