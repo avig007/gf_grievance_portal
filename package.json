@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Express server for love letter and grievance file upload to Google Drive",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
