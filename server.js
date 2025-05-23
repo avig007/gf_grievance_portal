@@ -62,7 +62,7 @@ async function uploadTextToDrive(text, name) {
 }
 
 // 💌 Love letter endpoint
-app.post('https://gf-grievance-portal-1.onrender.com/loveletter', upload.fields([
+app.post('/loveletter', upload.fields([
   { name: 'photos', maxCount: 15 },
   { name: 'letterFile', maxCount: 1 }
 ]), async (req, res) => {
