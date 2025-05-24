@@ -15,27 +15,50 @@
       color: #d63384;
       font-family: 'Dancing Script', cursive;
       font-size: 36px;
+      text-align: center; /* Centered h1 */
     }
-    label, select, .rating span {
+    p {
+        text-align: center; /* Centered intro paragraph */
+    }
+    label, .rating-label { /* Added class for rating label */
       font-family: 'Dancing Script', cursive;
       font-size: 18px;
       color: #b30059;
+      display: block; /* Ensure labels take full width */
+      margin-top: 12px; /* Added margin for spacing */
+    }
+    .rating {
+        text-align: center; /* Center emojis */
+        margin-bottom: 12px;
     }
     .rating span {
       font-size: 30px;
       cursor: pointer;
-      margin: 5px;
+      margin: 0 5px; /* Adjusted margin */
       opacity: 0.5;
+      transition: opacity 0.2s ease, transform 0.2s ease; /* Smooth transition */
+    }
+    .rating span:hover {
+        opacity: 0.8;
+        transform: scale(1.1);
     }
     .rating span.selected {
       opacity: 1;
+      transform: scale(1.2); /* Slightly larger when selected */
     }
     .file-preview {
+      display: block; /* Ensure img is block for margin auto to work */
       margin-top: 10px;
       max-height: 150px;
+      max-width: 100%;
+      margin-left: auto; /* Center preview if it's smaller than container */
+      margin-right: auto;
+      border: 1px solid #ddd; /* Optional: add a border */
+      border-radius: 4px;
     }
     button {
-      margin-top: 15px;
+      display: block; /* Center button */
+      margin: 25px auto 15px auto; /* Center button and add more top margin */
       background-color: #d63384;
       color: white;
       padding: 10px 20px;
@@ -43,13 +66,44 @@
       border-radius: 8px;
       cursor: pointer;
       font-family: 'Dancing Script', cursive;
-      font-size: 18px;
+      font-size: 20px; /* Slightly larger font */
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
-    select, textarea, input[type="file"] {
+    button:hover {
+        background-color: #c21a70;
+        transform: scale(1.05);
+    }
+    select, textarea, input[type="file"], input[type="radio"] {
       margin-top: 8px;
       margin-bottom: 12px;
       width: 100%;
+      padding: 8px; /* Added padding */
+      border: 1px solid #ccc; /* Added border */
+      border-radius: 4px; /* Added border-radius */
+      box-sizing: border-box; /* Ensures padding doesn't add to width */
       font-family: 'Poppins', sans-serif;
+    }
+    input[type="radio"] {
+        width: auto; /* Radio buttons should not be full width */
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+    .radio-group label { /* Style for radio button labels */
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        color: #333;
+        font-weight: normal;
+        display: inline; /* Keep label next to radio */
+        margin-left: 0;
+    }
+     .radio-option { /* Wrapper for each radio button and its label */
+        margin-bottom: 5px;
+    }
+    #response {
+      margin-top:20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
     }
   </style>
 </head>
@@ -58,110 +112,150 @@
   <h1>💖 GF Grievance Portal 💌</h1>
   <p>Welcome, Her Highness. Kindly submit your royal complaints below. 👑</p>
 
-  <label>💢 Royal Complaint:</label>
-  <textarea id="grievance" rows="5" placeholder="Speak your heart, Queen. 💬"></textarea>
+  <form id="grievanceForm"> <label for="grievance">💢 Royal Complaint:</label>
+    <textarea id="grievance" rows="5" placeholder="Speak your heart, Queen. 💬" required></textarea>
 
-  <label>📂 Category of Drama:</label><br>
-  <input type="radio" name="category" value="Forgot Anniversary"> Forgot Anniversary 💔<br>
-  <input type="radio" name="category" value="Late Reply"> Late Reply 🕐<br>
-  <input type="radio" name="category" value="Didn’t Call"> Didn’t Call 📵<br>
-  <input type="radio" name="category" value="Didn’t Notice New Dress"> Didn’t Notice New Dress 👗<br>
-  <input type="radio" name="category" value="Other"> Other 😒<br>
+    <label>📂 Category of Drama:</label>
+    <div class="radio-group">
+      <div class="radio-option"><input type="radio" name="category" value="Forgot Anniversary" required> <label>Forgot Anniversary 💔</label></div>
+      <div class="radio-option"><input type="radio" name="category" value="Late Reply"> <label>Late Reply 🕐</label></div>
+      <div class="radio-option"><input type="radio" name="category" value="Didn’t Call"> <label>Didn’t Call 📵</label></div>
+      <div class="radio-option"><input type="radio" name="category" value="Didn’t Notice New Dress"> <label>Didn’t Notice New Dress 👗</label></div>
+      <div class="radio-option"><input type="radio" name="category" value="Other"> <label>Other 😒</label></div>
+    </div>
 
-  <label>🔥 Severity Rating (Emoji Style):</label>
-  <div class="rating" id="emojiRating">
-    <span data-rate="1">😐</span>
-    <span data-rate="2">😤</span>
-    <span data-rate="3">😡</span>
-    <span data-rate="4">🤬</span>
-    <span data-rate="5">💣</span>
-  </div>
-  <input type="hidden" id="rating">
+    <label class="rating-label">🔥 Severity Rating (Emoji Style):</label>
+    <div class="rating" id="emojiRating">
+      <span data-rate="1">😐</span>
+      <span data-rate="2">😤</span>
+      <span data-rate="3">😡</span>
+      <span data-rate="4">🤬</span>
+      <span data-rate="5">💣</span>
+    </div>
+    <input type="hidden" id="rating" required>
 
-  <label>🔁 Frequency of Offense:</label>
-  <select id="frequency">
-    <option value="Once">Once 😶</option>
-    <option value="Sometimes">Sometimes 🤨</option>
-    <option value="Often">Often 😤</option>
-    <option value="Every Damn Time">Every Damn Time 💀</option>
-  </select>
+    <label for="frequency">🔁 Frequency of Offense:</label>
+    <select id="frequency">
+      <option value="Once">Once 😶</option>
+      <option value="Sometimes">Sometimes 🤨</option>
+      <option value="Often">Often 😤</option>
+      <option value="Every Damn Time">Every Damn Time 💀</option>
+    </select>
 
-  <label>💝 Preferred Apology Method:</label>
-  <select id="apology">
-    <option value="Chocolate & Flowers">Chocolate & Flowers 🍫🌸</option>
-    <option value="Public Apology">Public Apology 🎤</option>
-    <option value="Love Letter">Love Letter 💌</option>
-    <option value="Shopping Spree">Shopping Spree 🛍️</option>
-    <option value="Begging + Puppy Eyes">Begging + Puppy Eyes 🥺</option>
-  </select>
+    <label for="apology">💝 Preferred Apology Method:</label>
+    <select id="apology">
+      <option value="Chocolate & Flowers">Chocolate & Flowers 🍫🌸</option>
+      <option value="Public Apology">Public Apology 🎤</option>
+      <option value="Love Letter">Love Letter 💌</option>
+      <option value="Shopping Spree">Shopping Spree 🛍️</option>
+      <option value="Begging + Puppy Eyes">Begging + Puppy Eyes 🥺</option>
+    </select>
 
-  <label>📸 Upload Evidence (Screenshot/Photo):</label>
-  <input type="file" id="imageUpload" accept="image/*">
-  <img id="preview" class="file-preview"><br>
+    <label for="imageUpload">📸 Upload Evidence (Screenshot/Photo):</label>
+    <input type="file" id="imageUpload" accept="image/*">
+    <img id="preview" class="file-preview" src="#" alt="Image Preview" style="display:none;"> <button type="button" onclick="submitComplaint()">Submit Complaint 🚨</button>
+    </form>
 
-  <button onclick="submitComplaint()">Submit Complaint 🚨</button>
-
-  <p id="response" style="margin-top:20px;"></p>
+  <p id="response"></p>
 
   <script>
-    const emojiRating = document.querySelectorAll("#emojiRating span");
-    emojiRating.forEach(span => {
+    const emojiRatingSpans = document.querySelectorAll("#emojiRating span");
+    const ratingInput = document.getElementById("rating");
+
+    emojiRatingSpans.forEach(span => {
       span.addEventListener("click", () => {
-        emojiRating.forEach(s => s.classList.remove("selected"));
+        emojiRatingSpans.forEach(s => s.classList.remove("selected"));
         span.classList.add("selected");
-        document.getElementById("rating").value = span.dataset.rate;
+        ratingInput.value = span.dataset.rate;
       });
     });
 
     let selectedFile = null;
-    document.getElementById("imageUpload").addEventListener("change", function () {
+    const imageUploadInput = document.getElementById("imageUpload");
+    const previewImage = document.getElementById("preview");
+
+    imageUploadInput.addEventListener("change", function () {
       selectedFile = this.files[0];
       if (selectedFile) {
         const reader = new FileReader();
-        reader.onload = e => document.getElementById("preview").src = e.target.result;
+        reader.onload = e => {
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'block'; // Show preview
+        }
         reader.readAsDataURL(selectedFile);
+      } else {
+        previewImage.src = "#";
+        previewImage.style.display = 'none'; // Hide preview
       }
     });
 
     async function submitComplaint() {
+      const responseP = document.getElementById("response");
+      responseP.textContent = ""; // Clear previous response
+
       const complaint = document.getElementById("grievance").value;
-      const category = document.querySelector("input[name='category']:checked");
-      const rating = document.getElementById("rating").value;
+      const categoryRadio = document.querySelector("input[name='category']:checked");
+      const ratingValue = ratingInput.value;
       const frequency = document.getElementById("frequency").value;
       const apology = document.getElementById("apology").value;
       const username = localStorage.getItem("gfUser") || "Her Highness";
 
-      if (!complaint || !category || !rating) {
-        document.getElementById("response").innerText = "😤 Fill all the royal fields!";
+      if (!complaint.trim()) {
+        responseP.innerText = "😤 Royal complaint cannot be empty!";
+        document.getElementById("grievance").focus();
+        return;
+      }
+      if (!categoryRadio) {
+        responseP.innerText = "😤 Please select a category of drama!";
+        return;
+      }
+      if (!ratingValue) {
+        responseP.innerText = "😤 Please provide a severity rating!";
         return;
       }
 
+      responseP.innerText = "Submitting... ⏳";
+
       const formData = new FormData();
+      formData.append("formType", "grievance"); // Added formType
       formData.append("username", username);
       formData.append("complaint", complaint);
-      formData.append("category", category.value);
-      formData.append("rating", rating);
+      formData.append("category", categoryRadio.value);
+      formData.append("rating", ratingValue);
       formData.append("frequency", frequency);
       formData.append("apology", apology);
       if (selectedFile) {
-        formData.append("evidence", selectedFile);
+        formData.append("evidence", selectedFile, selectedFile.name); // Added filename
       }
 
-      const res = await fetch("https://gf-grievance-portal-1.onrender.com/grievance", {
-        method: "POST",
-        body: formData
-      });
+      try {
+        const res = await fetch("https://script.google.com/macros/s/AKfycbwrjE5y0trMic1fMR7LEFxP9AwOmY731FdTWmdGkgb8Ab2M9jLZ_teDTyw961VQyXqJLg/exec", { // IMPORTANT: Replace with your script URL
+          method: "POST",
+          body: formData
+        });
+        
+        if (!res.ok) { // Check for HTTP error status
+             const errorResult = await res.json().catch(() => ({message: 'Server returned an unreadable error.'}));
+             throw new Error(`HTTP error ${res.status}: ${errorResult.message}`);
+        }
+        
+        const result = await res.json();
 
-      const result = await res.json();
-      if (result.status === "success") {
-        document.getElementById("response").innerText = "📬 Complaint filed successfully!";
-        document.getElementById("grievance").value = "";
-        emojiRating.forEach(s => s.classList.remove("selected"));
-        document.getElementById("rating").value = "";
-        document.getElementById("preview").src = "";
-        document.getElementById("imageUpload").value = "";
-      } else {
-        document.getElementById("response").innerText = "🚨 Submission failed. Try again!";
+        if (result.status === "success") {
+          responseP.innerText = "📬 Complaint filed successfully! Your concerns have been noted, Your Highness.";
+          document.getElementById("grievanceForm").reset(); // Reset the form
+          emojiRatingSpans.forEach(s => s.classList.remove("selected"));
+          ratingInput.value = "";
+          previewImage.src = "#";
+          previewImage.style.display = 'none';
+          selectedFile = null;
+          imageUploadInput.value = ""; // Clear file input
+        } else {
+          responseP.innerText = "🚨 Submission failed. " + (result.message || "Please try again!");
+        }
+      } catch (error) {
+        console.error('Submission error:', error);
+        responseP.innerText = "💥 Submission failed due to a network or script error. (" + error.message + ")";
       }
     }
   </script>
