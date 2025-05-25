@@ -47,7 +47,6 @@
 
     textarea,
     input[type='text'],
-    input[type='file'],
     button {
       width: 100%;
       padding: 10px;
@@ -126,7 +125,6 @@
     id="loveForm"
     action="https://script.google.com/macros/s/AKfycbzI2ly1p6rL-dXfWqyGHrg33w2VlhoDCGw_oy7ymtzFb4oPkVQ0DywgjeTz9AJZTfgXqA/exec"
     method="POST"
-    enctype="multipart/form-data"
   >
     <input type="hidden" name="formType" value="loveletter" />
 
@@ -188,44 +186,12 @@
     </div>
 
     <div class="question">
-      <label for="q2">🖤 Your safe word (just in case 😉)?</label>
-      <input
-        type="text"
-        id="q2"
-        name="q2"
-        placeholder="Enter something cute or spicy"
-      />
-    </div>
-
-    <div class="question">
-      <label>🧣 Pick your secret weapon:</label>
-      <div class="options">
-        <label><input type="checkbox" name="q3" value="Silk scarf" />Silk scarf</label>
-        <label><input type="checkbox" name="q3" value="Whipped cream" />Whipped cream</label>
-        <label><input type="checkbox" name="q3" value="Ice cube" />Ice cube</label>
-        <label><input type="checkbox" name="q3" value="Feather" />Feather</label>
-        <input
-          class="custom-input"
-          type="text"
-          name="q3custom"
-          placeholder="Your naughty tool?"
-        />
-      </div>
-    </div>
-
-    <div class="question">
       <label>📸 Want to upload photos too?</label>
       <div class="options">
         <label><input type="radio" name="uploadPhotos" value="yes" required /> Yes, I want to upload photos</label>
         <label><input type="radio" name="uploadPhotos" value="no" /> No, just submit my love letter</label>
       </div>
     </div>
-
-    <label for="photos">If you want to send something to your loving partner, please upload them (I want nudes...) (max 15):</label>
-    <input type="file" name="photos" id="photos" accept="image/*" multiple />
-
-    <label for="letterFile">Attach a love letter (PDF/DOC/TXT) (optional):</label>
-    <input type="file" name="letterFile" id="letterFile" accept=".pdf,.doc,.docx,.txt" />
 
     <button type="submit">💌Send with lots of loveeee💌</button>
   </form>
@@ -241,14 +207,6 @@
   ></p>
 
   <script>
-    // Limit to 15 files for photos
-    document.getElementById('photos').addEventListener('change', function () {
-      if (this.files.length > 15) {
-        alert('Please select up to 15 photos only.');
-        this.value = '';
-      }
-    });
-
     document.getElementById('loveForm').addEventListener('submit', async function (event) {
       event.preventDefault();
 
