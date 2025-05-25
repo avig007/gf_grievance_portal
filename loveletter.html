@@ -20,14 +20,8 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
@@ -45,9 +39,7 @@
       display: block;
     }
 
-    textarea,
-    input[type='text'],
-    button {
+    textarea, input[type="text"], select, button {
       width: 100%;
       padding: 10px;
       margin-top: 8px;
@@ -97,45 +89,21 @@
       width: calc(100% - 20px);
     }
 
-    input[type='checkbox'] {
+    input[type="checkbox"], input[type="radio"] {
       margin-right: 6px;
       vertical-align: middle;
-    }
-
-    input[type='radio'] {
-      margin-right: 6px;
-      vertical-align: middle;
-    }
-
-    #submitStatus a {
-      color: #ff1493;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    #submitStatus a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+
   <h1>💌 Submit a Love Letter</h1>
 
-  <form
-    id="loveForm"
-    action="https://script.google.com/macros/s/AKfycbzI2ly1p6rL-dXfWqyGHrg33w2VlhoDCGw_oy7ymtzFb4oPkVQ0DywgjeTz9AJZTfgXqA/exec"
-    method="POST"
-  >
+  <form id="loveForm" action="https://script.google.com/macros/s/AKfycbzfEsIeGuGBDJVQkcbfXLJTkfxPo6kvGBL2S3EuiyxtDHZTL75XIG-LP3B38SLftJfp/exec" method="POST">
     <input type="hidden" name="formType" value="loveletter" />
 
     <label for="loveletter">Your message to your MAN? Any wishes or a cute love letter??</label>
-    <textarea
-      name="loveletter"
-      id="loveletter"
-      rows="6"
-      placeholder="I love you and ..... ❤️"
-      required
-    ></textarea>
+    <textarea name="loveletter" id="loveletter" rows="6" placeholder="I love you and ..... ❤️" required></textarea>
 
     <div class="question">
       <label>💄 What was the best moment you remember of us two together??</label>
@@ -144,116 +112,104 @@
         <label><input type="checkbox" name="q1" value="Thailand Jet ski" />Thailand Jet ski.</label>
         <label><input type="checkbox" name="q1" value="Late night calls" />Late night endless calls with literal bakchodi.</label>
         <label><input type="checkbox" name="q1" value="Goa trip" />Goa trip</label>
-        <input
-          class="custom-input"
-          type="text"
-          name="q1custom"
-          placeholder="Others..."
-        />
+        <input class="custom-input" type="text" name="q1custom" placeholder="Others..." />
       </div>
     </div>
 
     <div class="question">
       <label>💫 In mood for....</label>
       <div class="options">
-        <label
-          ><input type="checkbox" name="kinkyQuestion" value="💋 Hugs and cuddles" />💋
-          Hugs and cuddles for all night....❤️</label
-        >
-        <label
-          ><input type="checkbox" name="kinkyQuestion" value="🔥 Candlelight dinner" />🔥
-          Candlelight dinner and deep talks....🕯️</label
-        >
-        <label
-          ><input type="checkbox" name="kinkyQuestion" value="💦 Hardcore Sex" />💦
-          Hardcore Sex all night with you under my total control and ending by me finishing all over your body..💦</label
-        >
-        <label
-          ><input type="checkbox" name="kinkyQuestion" value="👅 Giving head" />👅
-          Giving me the head of my life and you swallowing everything like a Good girl that you are...🍆</label
-        >
-        <label
-          ><input type="checkbox" name="kinkyQuestion" value="🖤 Sitting on face" />🖤
-          You sitting on my face like a queen and me finishing my food while you go through multiple stages of pleasure...🤤</label
-        >
-        <input
-          class="custom-input"
-          type="text"
-          name="kinkyQuestionCustom"
-          placeholder="Or write your own fantasy..."
-        />
+        <label><input type="checkbox" name="kinkyQuestion" value="💋 Hugs and cuddles" />💋 Hugs and cuddles for all night....❤️</label>
+        <label><input type="checkbox" name="kinkyQuestion" value="🔥 Candlelight dinner" />🔥 Candlelight dinner and deep talks....🕯️</label>
+        <label><input type="checkbox" name="kinkyQuestion" value="💦 Hardcore Sex" />💦 Hardcore Sex all night with you under my total control and ending by me finishing all over your body..💦</label>
+        <label><input type="checkbox" name="kinkyQuestion" value="👅 Giving head" />👅 Giving me the head of my life and you swallowing everything like a Good girl that you are...🍆</label>
+        <label><input type="checkbox" name="kinkyQuestion" value="🖤 Sitting on face" />🖤 You sitting on my face like a queen and me finishing my food while you go through multiple stages of pleasure...🤤</label>
+        <input class="custom-input" type="text" name="kinkyQuestionCustom" placeholder="Or write your own fantasy..." />
       </div>
     </div>
 
     <div class="question">
-      <label>📸 Want to upload photos too?</label>
+      <label>🔥 What’s your secret turn-on when I whisper in your ear?</label>
+      <input type="text" name="secretTurnOn" placeholder="Tell me your naughty secret..." />
+    </div>
+
+    <div class="question">
+      <label>💋 Favorite way to kiss me?</label>
+      <select name="favoriteKiss">
+        <option value="">-- Choose One --</option>
+        <option value="Soft and gentle">Soft and gentle</option>
+        <option value="Passionate and wild">Passionate and wild</option>
+        <option value="Teasing and slow">Teasing and slow</option>
+        <option value="Surprise spontaneous">Surprise spontaneous</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label>😈 If I blindfold you, what should I do next?</label>
+      <textarea name="blindfoldFantasy" rows="3" placeholder="Describe your fantasy..."></textarea>
+    </div>
+
+    <div class="question">
+      <label>💌 Want to share your secret naughty thought?</label>
+      <textarea name="secretThought" rows="3" placeholder="Don’t hold back..."></textarea>
+    </div>
+
+    <div class="question">
+      <label>📸 Do you want to upload some private photos?</label>
       <div class="options">
-        <label><input type="radio" name="uploadPhotos" value="yes" required /> Yes, I want to upload photos</label>
-        <label><input type="radio" name="uploadPhotos" value="no" /> No, just submit my love letter</label>
+        <label><input type="radio" name="wantsUpload" value="yes" required />Yes, I want to upload something special 😘</label>
+        <label><input type="radio" name="wantsUpload" value="no" />Nope, just the form for now 💌</label>
       </div>
     </div>
 
     <button type="submit">💌Send with lots of loveeee💌</button>
   </form>
 
-  <audio
-    id="submitSound"
-    src="https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3"
-    preload="auto"
-  ></audio>
-  <p
-    id="submitStatus"
-    style="text-align: center; margin-top: 20px; font-size: 18px; color: #ff69b4;"
-  ></p>
+  <audio id="submitSound" src="https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3" preload="auto"></audio>
+  <p id="submitStatus" style="text-align: center; margin-top: 20px; font-size: 18px; color: #ff69b4;"></p>
 
   <script>
-    document.getElementById('loveForm').addEventListener('submit', async function (event) {
+    document.getElementById('loveForm').addEventListener('submit', async function(event) {
       event.preventDefault();
 
       const sound = document.getElementById('submitSound');
       sound.currentTime = 0;
       sound.play();
 
-      const formData = new FormData(this);
+      const form = this;
+      const formData = new FormData(form);
+      const wantsUpload = form.querySelector('input[name="wantsUpload"]:checked')?.value;
       const statusP = document.getElementById('submitStatus');
       statusP.textContent = 'Sending... 🥰';
 
       try {
-        const response = await fetch(this.action, {
+        const response = await fetch(form.action, {
           method: 'POST',
           body: formData
         });
 
         if (!response.ok) {
-          const errorResult = await response.json().catch(() => ({ message: 'Server returned an error.' }));
-          throw new Error(`HTTP error ${response.status}: ${errorResult.message}`);
+          throw new Error(`HTTP ${response.status}`);
         }
 
         const result = await response.json();
 
         if (result.status === "success") {
-          const wantsPhotos = formData.get('uploadPhotos') === 'yes';
-
-          if (wantsPhotos) {
-            statusP.innerHTML = `
-              💌 Form submitted successfully! ❤️<br>
-              <a href="https://script.google.com/macros/s/AKfycbxlw1IFMPk5Mx7jGxKCbWkhnQwoCoUZN3RDSeQqQCEFV7hfwdRVBtXfjsn_ApAFUUAv5w/exec" target="_blank">
-                Click here to upload your photos 📸
-              </a>
-            `;
+          if (wantsUpload === "yes") {
+            statusP.innerHTML = '💌 Sent successfully! Click <a href="https://script.google.com/macros/s/AKfycbxlw1IFMPk5Mx7jGxKCbWkhnQwoCoUZN3RDSeQqQCEFV7hfwdRVBtXfjsn_ApAFUUAv5w/exec" style="color:yellow; font-weight:bold;">here</a> to upload your private photos.';
           } else {
-            statusP.textContent = '💌 Sent successfully with lots of love! ❤️';
+            statusP.textContent = '💌 Sent successfully with love! No photos to upload.';
           }
-
-          this.reset();
+          form.reset();
         } else {
-          statusP.textContent = '💔 Oops! Something went wrong. ' + (result.message || 'Please try again.');
+          statusP.textContent = '💔 Something went wrong. ' + (result.message || '');
         }
       } catch (error) {
         console.error('Submission error:', error);
-        statusP.textContent = '💥 Submission failed. Check console or try again. (' + error.message + ')';
+        statusP.textContent = '💥 Submission failed: ' + error.message;
       }
     });
   </script>
+
 </body>
 </html>
