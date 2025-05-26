@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-image: url('https://raw.githubusercontent.com/avig007/gf_grievance_portal/60ad5ae33b2c19ba353eecfe5b604ad019c78480/IMG_1129.JPG');
+      background-image: url('https://raw.githubusercontent.com/avig007/gf_grievance_portal/60ad5ae33b2c19ba353eecfe5b604ad019c78480/IMG_1128.JPG');
       background-size: cover;
       background-attachment: fixed;
       background-position: center;
@@ -102,39 +102,60 @@
   <form id="loveForm" action="https://script.google.com/macros/s/AKfycbzfEsIeGuGBDJVQkcbfXLJTkfxPo6kvGBL2S3EuiyxtDHZTL75XIG-LP3B38SLftJfp/exec" method="POST">
     <input type="hidden" name="formType" value="loveletter" />
 
-    <label for="loveletter">Your message to your MAN? Any wishes or a cute love letter??</label>
+    <div class="question">
+      <label>Your Name</label>
+      <select name="Username">
+        <option value="">❤️</option>
+        <option value="Soft and gentle">AVI💪</option>
+        <option value="Passionate and wild">👙👠SHARINI💅🌸</option>
+      </select>
+    </div>
+
+    <label for="loveletter">💖🥰 Your message to your significant other? Any wishes or a cute love letter??👩‍❤️‍👨✨</label>
     <textarea name="loveletter" id="loveletter" rows="6" placeholder="I love you and ..... ❤️" required></textarea>
 
     <div class="question">
-      <label>💄 What was the best moment you remember of us two together??</label>
+      <label>💄🍑 Last time together, what was the most memorable part for you??👅🍆 </label>
       <div class="options">
-        <label><input type="checkbox" name="q1" value="Mumbai trip" />Mumbai short trip with unlimited cuddles and kisses.</label>
-        <label><input type="checkbox" name="q1" value="Thailand Jet ski" />Thailand Jet ski.</label>
-        <label><input type="checkbox" name="q1" value="Late night calls" />Late night endless calls with literal bakchodi.</label>
-        <label><input type="checkbox" name="q1" value="Goa trip" />Goa trip</label>
-        <input class="custom-input" type="text" name="q1custom" placeholder="Others..." />
+        <label><input type="checkbox" name="LastMemory" value="🛏️Extreme Orgasms with a lot of wet nights...🤤" />🛏️Extreme Orgasms with a lot of wet nights...🤤</label>
+        <label><input type="checkbox" name="LastMemory" value="💝Super Cute Date nights with lovely talks and your company...💐" />💝Super Cute Date nights with lovely talks and your company...💐</label>
+        <label><input type="checkbox" name="LastMemory" value="🪩Us doing random crazy shit to each other and both of us making each other happy...😍" />🪩Us doing random crazy shit to each other and both of us making each other happy...😍</label>
+        <label><input type="checkbox" name="LastMemory" value="💋Endless sex with both of us immersed into each other as one, and also a lot of HEAD Game to make it hot and WET...💦" />💋Endless sex with both of us immersed into each other as one, and also a lot of HEAD Game to make it hot and WET...💦</label>
+        <input class="custom-input" type="text" name="LastMemoryCustom" placeholder="Others..." />
       </div>
     </div>
 
     <div class="question">
-      <label>💫 In mood for....</label>
+      <label>💄🍑 Last time together, what was the most memorable part for you??👅🍆</label>
+      <div class="options" id="lastMemoryOptions">
+        <label><input type="checkbox" name="LastMemory" value="🛏️Extreme Orgasms with a lot of wet nights...🤤" />🛏️Extreme Orgasms with a lot of wet nights...🤤</label>
+        <label><input type="checkbox" name="LastMemory" value="💝Super Cute Date nights with lovely talks and your company...💐" />💝Super Cute Date nights with lovely talks and your company...💐</label>
+        <label><input type="checkbox" name="LastMemory" value="🪩Us doing random crazy shit to each other and both of us making each other happy...😍" />🪩Us doing random crazy shit to each other and both of us making each other happy...😍</label>
+        <label><input type="checkbox" name="LastMemory" value="💋Endless sex with both of us immersed into each other as one, and also a lot of HEAD Game to make it hot and WET...💦" />💋Endless sex with both of us immersed into each other as one, and also a lot of HEAD Game to make it hot and WET...💦</label>
+      <div id="customMemoryContainer"></div>
+        <button type="button" onclick="addCustomMemory()">+ Add Custom Memory</button>
+      </div>
+    </div>
+    
+    <div class="question">
+      <label>💫I know you are eager to see me, but just give me tease for later on....</label>
       <div class="options">
-        <label><input type="checkbox" name="kinkyQuestion" value="💋 Hugs and cuddles" />💋 Hugs and cuddles for all night....❤️</label>
-        <label><input type="checkbox" name="kinkyQuestion" value="🔥 Candlelight dinner" />🔥 Candlelight dinner and deep talks....🕯️</label>
-        <label><input type="checkbox" name="kinkyQuestion" value="💦 Hardcore Sex" />💦 Hardcore Sex all night with you under my total control and ending by me finishing all over your body..💦</label>
-        <label><input type="checkbox" name="kinkyQuestion" value="👅 Giving head" />👅 Giving me the head of my life and you swallowing everything like a Good girl that you are...🍆</label>
-        <label><input type="checkbox" name="kinkyQuestion" value="🖤 Sitting on face" />🖤 You sitting on my face like a queen and me finishing my food while you go through multiple stages of pleasure...🤤</label>
+        <label><input type="checkbox" name="kinkyQuestion" value="💋 Hugs and cuddles for all night while watching a movie....❤️" />💋 Hugs and cuddles for all night while watching a movie....❤️</label>
+        <label><input type="checkbox" name="kinkyQuestion" value="🔥 Candlelight dinner and deep talks and conversations for a cute date night....🕯️" />🔥 Candlelight dinner and deep talks and conversations for a cute date night....🕯️</label>
+        <label><input type="checkbox" name="kinkyQuestion" value="💦 Hardcore Sex" />💦 Hardcore Sex all night with you under my total control and ending by one of us finishing all over the other one's body (🕺FULL SLUT TREATMENT💃)...💦</label>
+        <label><input type="checkbox" name="kinkyQuestion" value="👅 Giving head" />👅 Giving me the head of my life and you swallowing everything like a Good girl/boy that you are...🍆</label>
+        <label><input type="checkbox" name="kinkyQuestion" value="🖤 Sitting on face" />🖤 You sitting on my face like a queen and me finishing my food while you go through multiple stages of pleasure...(SHARINI's SEAT IS ONLY RESERVED FOR AVIII..)🤤</label>
         <input class="custom-input" type="text" name="kinkyQuestionCustom" placeholder="Or write your own fantasy..." />
       </div>
     </div>
 
     <div class="question">
-      <label>🔥 What’s your secret turn-on when I whisper in your ear?</label>
-      <input type="text" name="secretTurnOn" placeholder="Tell me your naughty secret..." />
+      <label>😘 Let me know the code-word to turn me on the next time we are meeting...</label>
+      <input type="text" name="secretTurnOn" placeholder="Make it spicy..." />
     </div>
 
     <div class="question">
-      <label>💋 Favorite way to kiss me?</label>
+      <label>💋 Let's make it spicy?</label>
       <select name="favoriteKiss">
         <option value="">-- Choose One --</option>
         <option value="Soft and gentle">Soft and gentle</option>
@@ -171,6 +192,19 @@
   <script>
     document.getElementById('loveForm').addEventListener('submit', async function(event) {
       event.preventDefault();
+      function addCustomMemory() {
+      const container = document.getElementById('customMemoryContainer');
+      const index = container.children.length;
+  
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = `
+        <label>
+          <input type="checkbox" name="LastMemoryCustom${index}" onclick="this.value=this.nextElementSibling.value" />
+          <input type="text" placeholder="Your custom memory..." oninput="this.previousElementSibling.value=this.value" />
+        </label>
+      `;
+      container.appendChild(wrapper);
+      }
 
       const sound = document.getElementById('submitSound');
       sound.currentTime = 0;
