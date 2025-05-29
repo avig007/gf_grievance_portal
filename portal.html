@@ -1,263 +1,368 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" >
 <head>
-  <title>GF Grievance Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔥 Angry Grievance Portal + Rage Meter 🔥</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #fdf3f3;
+      background-image: url('https://raw.githubusercontent.com/avig007/gf_grievance_portal/6dc28ca896a26675381de6b3a73833c604ccbca4/IMG_1146%20(1).JPG');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #f44336;
+      font-family: 'Courier New', Courier, monospace;
       padding: 20px;
-      max-width: 700px;
-      margin: auto;
+      backdrop-filter: brightness(0.6);
     }
+
     h1 {
-      color: #d63384;
-      font-family: 'Dancing Script', cursive;
-      font-size: 36px;
-      text-align: center; /* Centered h1 */
-    }
-    p {
-        text-align: center; /* Centered intro paragraph */
-    }
-    label, .rating-label { /* Added class for rating label */
-      font-family: 'Dancing Script', cursive;
-      font-size: 18px;
-      color: #b30059;
-      display: block; /* Ensure labels take full width */
-      margin-top: 12px; /* Added margin for spacing */
-    }
-    .rating {
-        text-align: center; /* Center emojis */
-        margin-bottom: 12px;
-    }
-    .rating span {
-      font-size: 30px;
-      cursor: pointer;
-      margin: 0 5px; /* Adjusted margin */
-      opacity: 0.5;
-      transition: opacity 0.2s ease, transform 0.2s ease; /* Smooth transition */
-    }
-    .rating span:hover {
-        opacity: 0.8;
-        transform: scale(1.1);
-    }
-    .rating span.selected {
-      opacity: 1;
-      transform: scale(1.2); /* Slightly larger when selected */
-    }
-    .file-preview {
-      display: block; /* Ensure img is block for margin auto to work */
-      margin-top: 10px;
-      max-height: 150px;
-      max-width: 100%;
-      margin-left: auto; /* Center preview if it's smaller than container */
-      margin-right: auto;
-      border: 1px solid #ddd; /* Optional: add a border */
-      border-radius: 4px;
-    }
-    button {
-      display: block; /* Center button */
-      margin: 25px auto 15px auto; /* Center button and add more top margin */
-      background-color: #d63384;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: 'Dancing Script', cursive;
-      font-size: 20px; /* Slightly larger font */
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    button:hover {
-        background-color: #c21a70;
-        transform: scale(1.05);
-    }
-    select, textarea, input[type="file"], input[type="radio"] {
-      margin-top: 8px;
-      margin-bottom: 12px;
-      width: 100%;
-      padding: 8px; /* Added padding */
-      border: 1px solid #ccc; /* Added border */
-      border-radius: 4px; /* Added border-radius */
-      box-sizing: border-box; /* Ensures padding doesn't add to width */
-      font-family: 'Poppins', sans-serif;
-    }
-    input[type="radio"] {
-        width: auto; /* Radio buttons should not be full width */
-        margin-right: 5px;
-        vertical-align: middle;
-    }
-    .radio-group label { /* Style for radio button labels */
-        font-family: 'Poppins', sans-serif;
-        font-size: 15px;
-        color: #333;
-        font-weight: normal;
-        display: inline; /* Keep label next to radio */
-        margin-left: 0;
-    }
-     .radio-option { /* Wrapper for each radio button and its label */
-        margin-bottom: 5px;
-    }
-    #response {
-      margin-top:20px;
+      font-size: 2em;
       text-align: center;
-      font-weight: bold;
-      font-size: 17px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #f44336;
+      padding-bottom: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
     }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-size: 1.1em;
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 5px;
+    }
+
+    .checkbox-group, .text-group, .range-group {
+      margin-left: 25px;
+      margin-top: 10px;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    textarea {
+      width: 90%;
+      height: 100px;
+      background-color: #2a2a2a;
+      color: #f44336;
+      border: 1px solid #f44336;
+      padding: 10px;
+      font-family: 'Courier New', Courier, monospace;
+      resize: vertical;
+    }
+
+    input[type="range"] {
+      width: 80%;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1em;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #ff6659;
+    }
+
+    a {
+      color: #aaffaa;
+      text-decoration: underline;
+    }
+
+    #uploadLinkContainer label {
+      background-color: transparent;
+      color: #aaffaa;
+    }
+
+    /* Rage Meter styles */
+    .rage-container {
+      margin-bottom: 30px;
+      background-color: #333;
+      border: 2px solid #f44336;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 90%;
+      height: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      box-shadow: inset 0 0 10px #ff0000;
+    }
+
+    .rage-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #f44336, #ff1744);
+      transition: width 0.4s ease-in-out, background-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+      box-shadow: 0 0 10px #ff1744;
+    }
+
+    .rage-label {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 3px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      pointer-events: none;
+      text-shadow: 0 0 5px #ff0000;
+    }
+
+    /* Fire animation container */
+    #fireAnimation {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 150px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 9999;
+    }
+
+    /* Flames */
+    @keyframes flicker {
+      0%, 100% { transform: scale(1) translateX(0); opacity: 1; }
+      50% { transform: scale(1.05) translateX(2px); opacity: 0.8; }
+    }
+
+    .flame {
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 50px;
+      background: radial-gradient(circle at 50% 100%, #ff3c00, transparent 70%);
+      border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+      animation: flicker 0.7s infinite ease-in-out;
+      filter: drop-shadow(0 0 10px #ff3c00);
+    }
+
+    .flame:nth-child(1) { left: 15px; animation-delay: 0s; height: 40px;}
+    .flame:nth-child(2) { left: 45px; animation-delay: 0.2s; height: 55px;}
+    .flame:nth-child(3) { left: 75px; animation-delay: 0.4s; height: 50px;}
+    .flame:nth-child(4) { left: 105px; animation-delay: 0.3s; height: 45px;}
+
+    /* Custom input style */
+    .custom-option-input {
+      margin-top: 5px;
+      margin-left: 25px;
+      width: 80%;
+      background-color: #2a2a2a;
+      border: 1px solid #f44336;
+      color: #f44336;
+      padding: 5px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9em;
+      border-radius: 3px;
+    }
+
   </style>
 </head>
 <body>
+  <h1>😠 Angry Grievance Portal 😠</h1>
 
-  <h1>💖 GF Grievance Portal 💌</h1>
-  <p>Welcome, Her Highness. Kindly submit your royal complaints below. 👑</p>
+  <div class="rage-container">
+    <div class="rage-bar" id="rageBar"></div>
+    <div class="rage-label" id="rageLabel">Rage Level: 0%</div>
+  </div>
 
-  <form id="grievanceForm"> <label for="grievance">💢 Royal Complaint:</label>
-    <textarea id="grievance" rows="5" placeholder="Speak your heart, Queen. 💬" required></textarea>
+  <div id="fireAnimation" aria-hidden="true">
+    <div class="flame"></div>
+    <div class="flame"></div>
+    <div class="flame"></div>
+    <div class="flame"></div>
+  </div>
 
-    <label>📂 Category of Drama:</label>
-    <div class="radio-group">
-      <div class="radio-option"><input type="radio" name="category" value="Forgot Anniversary" required> <label>Forgot Anniversary 💔</label></div>
-      <div class="radio-option"><input type="radio" name="category" value="Late Reply"> <label>Late Reply 🕐</label></div>
-      <div class="radio-option"><input type="radio" name="category" value="Didn’t Call"> <label>Didn’t Call 📵</label></div>
-      <div class="radio-option"><input type="radio" name="category" value="Didn’t Notice New Dress"> <label>Didn’t Notice New Dress 👗</label></div>
-      <div class="radio-option"><input type="radio" name="category" value="Other"> <label>Other 😒</label></div>
+  <form id="grievanceForm">
+    <label>What made you irritated lately with your partner? 🤬 (select all that apply + add your own!)</label>
+    <div class="checkbox-group" id="grievanceCheckboxes">
+      <label><input type="checkbox" name="grievances" value="Ignoring texts and calls">📵 Ignoring texts and calls</label>
+      <label><input type="checkbox" name="grievances" value="Lack of appreciation">😒 Lack of appreciation</label>
+      <label><input type="checkbox" name="grievances" value="Obsessed with phone">📱 Obsessed with phone</label>
+      <label><input type="checkbox" name="grievances" value="Poor communication">🗯️ Poor communication</label>
+      <label><input type="checkbox" name="grievances" value="Selective listening disorder">👂 Selective listening disorder</label>
+      <label><input type="checkbox" name="grievances" value="Breaking promises casually">💔 Breaking promises casually</label>
+      <label><input type="checkbox" name="grievances" value="Leaving trails of mess">🧻 Leaving trails of mess like breadcrumbs</label>
+      <label><input type="checkbox" name="grievances" value="Running late to everything">⏰ Running late to every single thing</label>
+      <label><input type="checkbox" name="grievances" value="Using “I forgot” as excuse">😤 Using “I forgot” as an official excuse</label>
+      <label><input type="checkbox" name="grievances" value="Silent treatment weapon">🤐 Deploying the silent treatment like a weapon</label>
+      <label><input type="checkbox" name="grievances" value="Dishes stayed in sink">🍽️ Dishes stayed in sink long enough to gain consciousness</label>
+      <label><input type="checkbox" name="grievances" value="Saying 'I'm fine' when not">📢 Saying "I'm fine" when clearly NOT fine</label>
+    </div>
+    <input type="text" id="customGrievance" class="custom-option-input" placeholder="Add your own grievance here..." />
+
+    <label>How often were plans canceled last minute? 📆 (select all that apply + add your own!)</label>
+    <div class="checkbox-group" id="cancelCheckboxes">
+      <label><input type="checkbox" name="cancellations" value="Once or twice">🛑 Once or twice, forgivable maybe</label>
+      <label><input type="checkbox" name="cancellations" value="Regularly">📉 Regularly, my trust issues say hi</label>
+      <label><input type="checkbox" name="cancellations" value="All the time">🧊 All the time, I now make backup plans with myself</label>
+    </div>
+    <input type="text" id="customCancellation" class="custom-option-input" placeholder="Add your own cancellation reason here..." />
+
+    <label>Do you suspect emotional damage was inflicted via memes? 😩📲 (select all that apply + add your own!)</label>
+    <div class="checkbox-group" id="memeCheckboxes">
+      <label><input type="checkbox" name="memeDamage" value="Yes, I was the target">😂 Yes, I was the target</label>
+      <label><input type="checkbox" name="memeDamage" value="Passive aggressive memes">📤 Yes, and they were passive-aggressively sent to me</label>
+      <label><input type="checkbox" name="memeDamage" value="No meme damage">📵 No meme damage detected… this time</label>
+    </div>
+    <input type="text" id="customMemeDamage" class="custom-option-input" placeholder="Add your own meme damage here..." />
+
+    <label>Rate the level of petty behavior witnessed this week 😤 (0 = Angel, 10 = Absolute menace)</label>
+    <div class="range-group">
+      <input type="range" id="pettyLevel" min="0" max="10" value="5">
     </div>
 
-    <label class="rating-label">🔥 Severity Rating (Emoji Style):</label>
-    <div class="rating" id="emojiRating">
-      <span data-rate="1">😐</span>
-      <span data-rate="2">😤</span>
-      <span data-rate="3">😡</span>
-      <span data-rate="4">🤬</span>
-      <span data-rate="5">💣</span>
+    <label>Do you wish to receive emotional compensation? 🧾 (select all that apply + add your own!)</label>
+    <div class="checkbox-group" id="compensationCheckboxes">
+      <label><input type="checkbox" name="compensations" value="Pizza">🍕 In pizza form</label>
+      <label><input type="checkbox" name="compensations" value="Gift or apology letter">🛍️ Gift or apology letter preferred</label>
+      <label><input type="checkbox" name="compensations" value="Monetary refund">💸 Monetary refund for emotional damage</label>
+      <label><input type="checkbox" name="compensations" value="Peace and space">😶 Just some peace and space</label>
     </div>
-    <input type="hidden" id="rating" required>
+    <input type="text" id="customCompensation" class="custom-option-input" placeholder="Add your own compensation here..." />
 
-    <label for="frequency">🔁 Frequency of Offense:</label>
-    <select id="frequency">
-      <option value="Once">Once 😶</option>
-      <option value="Sometimes">Sometimes 🤨</option>
-      <option value="Often">Often 😤</option>
-      <option value="Every Damn Time">Every Damn Time 💀</option>
-    </select>
+    <label>Want to yell into the void? 🗣️ Drop your rant below:</label>
+    <div class="text-group">
+      <textarea id="rantText" placeholder="Go ahead. Let it all out..."></textarea>
+    </div>
 
-    <label for="apology">💝 Preferred Apology Method:</label>
-    <select id="apology">
-      <option value="Chocolate & Flowers">Chocolate & Flowers 🍫🌸</option>
-      <option value="Public Apology">Public Apology 🎤</option>
-      <option value="Love Letter">Love Letter 💌</option>
-      <option value="Shopping Spree">Shopping Spree 🛍️</option>
-      <option value="Begging + Puppy Eyes">Begging + Puppy Eyes 🥺</option>
-    </select>
+    <button type="submit">Submit Grievance 🔥</button>
+  </form>
 
-    <label for="imageUpload">📸 Upload Evidence (Screenshot/Photo):</label>
-    <input type="file" id="imageUpload" accept="image/*">
-    <img id="preview" class="file-preview" src="#" alt="Image Preview" style="display:none;"> <button type="button" onclick="submitComplaint()">Submit Complaint 🚨</button>
-    </form>
-
-  <p id="response"></p>
+  <audio id="rageSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" preload="auto"></audio>
 
   <script>
-    const emojiRatingSpans = document.querySelectorAll("#emojiRating span");
-    const ratingInput = document.getElementById("rating");
+    const rageBar = document.getElementById('rageBar');
+    const rageLabel = document.getElementById('rageLabel');
+    const pettyLevelInput = document.getElementById('pettyLevel');
+    const fireAnimation = document.getElementById('fireAnimation');
+    const rageSound = document.getElementById('rageSound');
 
-    emojiRatingSpans.forEach(span => {
-      span.addEventListener("click", () => {
-        emojiRatingSpans.forEach(s => s.classList.remove("selected"));
-        span.classList.add("selected");
-        ratingInput.value = span.dataset.rate;
-      });
-    });
+    // Update rage bar color based on level
+    function updateRageBar(value) {
+      rageBar.style.width = value + '%';
+      rageLabel.textContent = `Rage Level: ${value}%`;
 
-    let selectedFile = null;
-    const imageUploadInput = document.getElementById("imageUpload");
-    const previewImage = document.getElementById("preview");
-
-    imageUploadInput.addEventListener("change", function () {
-      selectedFile = this.files[0];
-      if (selectedFile) {
-        const reader = new FileReader();
-        reader.onload = e => {
-            previewImage.src = e.target.result;
-            previewImage.style.display = 'block'; // Show preview
-        }
-        reader.readAsDataURL(selectedFile);
+      // Color gradient from green to red
+      if (value < 25) {
+        rageBar.style.backgroundColor = '#4caf50'; // green
+        rageBar.style.boxShadow = '0 0 10px #4caf50';
+      } else if (value < 50) {
+        rageBar.style.backgroundColor = '#ffeb3b'; // yellow
+        rageBar.style.boxShadow = '0 0 10px #ffeb3b';
+      } else if (value < 75) {
+        rageBar.style.backgroundColor = '#ff9800'; // orange
+        rageBar.style.boxShadow = '0 0 15px #ff9800';
       } else {
-        previewImage.src = "#";
-        previewImage.style.display = 'none'; // Hide preview
-      }
-    });
-
-    async function submitComplaint() {
-      const responseP = document.getElementById("response");
-      responseP.textContent = ""; // Clear previous response
-
-      const complaint = document.getElementById("grievance").value;
-      const categoryRadio = document.querySelector("input[name='category']:checked");
-      const ratingValue = ratingInput.value;
-      const frequency = document.getElementById("frequency").value;
-      const apology = document.getElementById("apology").value;
-      const username = localStorage.getItem("gfUser") || "Her Highness";
-
-      if (!complaint.trim()) {
-        responseP.innerText = "😤 Royal complaint cannot be empty!";
-        document.getElementById("grievance").focus();
-        return;
-      }
-      if (!categoryRadio) {
-        responseP.innerText = "😤 Please select a category of drama!";
-        return;
-      }
-      if (!ratingValue) {
-        responseP.innerText = "😤 Please provide a severity rating!";
-        return;
+        rageBar.style.backgroundColor = '#f44336'; // red
+        rageBar.style.boxShadow = '0 0 20px #f44336';
       }
 
-      responseP.innerText = "Submitting... ⏳";
-
-      const formData = new FormData();
-      formData.append("formType", "grievance"); // Added formType
-      formData.append("username", username);
-      formData.append("complaint", complaint);
-      formData.append("category", categoryRadio.value);
-      formData.append("rating", ratingValue);
-      formData.append("frequency", frequency);
-      formData.append("apology", apology);
-      if (selectedFile) {
-        formData.append("evidence", selectedFile, selectedFile.name); // Added filename
-      }
-
-      try {
-        const res = await fetch("https://script.google.com/macros/s/AKfycbzI2ly1p6rL-dXfWqyGHrg33w2VlhoDCGw_oy7ymtzFb4oPkVQ0DywgjeTz9AJZTfgXqA/exec", { // IMPORTANT: Replace with your script URL
-          method: "POST",
-          body: formData
-        });
-        
-        if (!res.ok) { // Check for HTTP error status
-             const errorResult = await res.json().catch(() => ({message: 'Server returned an unreadable error.'}));
-             throw new Error(`HTTP error ${res.status}: ${errorResult.message}`);
+      // Fire animation & sound at 100%
+      if (value >= 100) {
+        fireAnimation.style.opacity = '1';
+        if (rageSound.paused) {
+          rageSound.play();
         }
-        
-        const result = await res.json();
-
-        if (result.status === "success") {
-          responseP.innerText = "📬 Complaint filed successfully! Your concerns have been noted, Your Highness.";
-          document.getElementById("grievanceForm").reset(); // Reset the form
-          emojiRatingSpans.forEach(s => s.classList.remove("selected"));
-          ratingInput.value = "";
-          previewImage.src = "#";
-          previewImage.style.display = 'none';
-          selectedFile = null;
-          imageUploadInput.value = ""; // Clear file input
-        } else {
-          responseP.innerText = "🚨 Submission failed. " + (result.message || "Please try again!");
-        }
-      } catch (error) {
-        console.error('Submission error:', error);
-        responseP.innerText = "💥 Submission failed due to a network or script error. (" + error.message + ")";
+      } else {
+        fireAnimation.style.opacity = '0';
+        rageSound.pause();
+        rageSound.currentTime = 0;
       }
     }
+
+    // Initial rage bar set
+    updateRageBar(pettyLevelInput.value * 10);
+
+    pettyLevelInput.addEventListener('input', () => {
+      updateRageBar(pettyLevelInput.value * 10);
+    });
+
+    // Add custom option on enter in custom input fields for checkboxes
+    function setupCustomInput(customInputId, containerId, nameAttr) {
+      const input = document.getElementById(customInputId);
+      const container = document.getElementById(containerId);
+
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && input.value.trim() !== '') {
+          e.preventDefault();
+
+          const val = input.value.trim();
+          const idSafe = val.toLowerCase().replace(/\W+/g, '-');
+
+          // Check if option already exists
+          if ([...container.querySelectorAll('input')].some(i => i.value.toLowerCase() === val.toLowerCase())) {
+            alert('This option already exists!');
+            input.value = '';
+            return;
+          }
+
+          const label = document.createElement('label');
+          label.style.marginTop = '5px';
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.name = nameAttr;
+          checkbox.value = val;
+          checkbox.checked = true;
+          label.appendChild(checkbox);
+          label.appendChild(document.createTextNode(' ' + val));
+          container.appendChild(label);
+
+          input.value = '';
+        }
+      });
+    }
+
+    setupCustomInput('customGrievance', 'grievanceCheckboxes', 'grievances');
+    setupCustomInput('customCancellation', 'cancelCheckboxes', 'cancellations');
+    setupCustomInput('customMemeDamage', 'memeCheckboxes', 'memeDamage');
+    setupCustomInput('customCompensation', 'compensationCheckboxes', 'compensations');
+
+    document.getElementById('grievanceForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      // Collect checked values + text inputs
+      function getCheckedValues(name) {
+        return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(cb => cb.value);
+      }
+
+      const grievances = getCheckedValues('grievances');
+      const cancellations = getCheckedValues('cancellations');
+      const memeDamage = getCheckedValues('memeDamage');
+      const compensations = getCheckedValues('compensations');
+      const pettyLevel = pettyLevelInput.value;
+      const rant = document.getElementById('rantText').value.trim();
+
+      const result = {
+        grievances,
+        cancellations,
+        memeDamage,
+        compensations,
+        pettyLevel,
+        rant
+      };
+
+      alert('Grievance Submitted! See console for details.');
+
+      console.log('Submitted Grievance Data:', result);
+    });
   </script>
 </body>
 </html>
