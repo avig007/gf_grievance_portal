@@ -190,6 +190,15 @@
     <div class="flame"></div>
   </div>
 
+  <div class="question">
+    <label>Your Name</label>
+    <select name="Username">
+      <option value="">❤️</option>
+      <option value="AVI">AVI💪</option>
+      <option value="SHARINI">👙👠SHARINI💅🌸</option>
+    </select>
+  </div>
+  
   <form id="grievanceForm">
     <label>What made you irritated lately with your partner? 🤬 (select all that apply + add your own!)</label>
     <div class="checkbox-group" id="grievanceCheckboxes">
@@ -206,163 +215,168 @@
       <label><input type="checkbox" name="grievances" value="Dishes stayed in sink">🍽️ Dishes stayed in sink long enough to gain consciousness</label>
       <label><input type="checkbox" name="grievances" value="Saying 'I'm fine' when not">📢 Saying "I'm fine" when clearly NOT fine</label>
     </div>
-    <input type="text" id="customGrievance" class="custom-option-input" placeholder="Add your own grievance here..." />
+    <input type="text" id="customGrievance" class="custom-option-input" placeholder="Add your own grievance here" />
 
-    <label>How often were plans canceled last minute? 📆 (select all that apply + add your own!)</label>
+    <label>What canceled plans or surprises ruined your mood? 🤡 (select all that apply + add your own!)</label>
     <div class="checkbox-group" id="cancelCheckboxes">
-      <label><input type="checkbox" name="cancellations" value="Once or twice">🛑 Once or twice, forgivable maybe</label>
-      <label><input type="checkbox" name="cancellations" value="Regularly">📉 Regularly, my trust issues say hi</label>
-      <label><input type="checkbox" name="cancellations" value="All the time">🧊 All the time, I now make backup plans with myself</label>
+      <label><input type="checkbox" name="cancellations" value="Last-minute plan cancellation">📅 Last-minute plan cancellation</label>
+      <label><input type="checkbox" name="cancellations" value="Forgot anniversary">🎉 Forgot anniversary</label>
+      <label><input type="checkbox" name="cancellations" value="Ignoring birthday wishes">🎂 Ignoring birthday wishes</label>
+      <label><input type="checkbox" name="cancellations" value="Spoiled surprise party">🎈 Spoiled surprise party</label>
     </div>
-    <input type="text" id="customCancellation" class="custom-option-input" placeholder="Add your own cancellation reason here..." />
+    <input type="text" id="customCancellation" class="custom-option-input" placeholder="Add your own canceled plan or surprise" />
 
-    <label>Do you suspect emotional damage was inflicted via memes? 😩📲 (select all that apply + add your own!)</label>
+    <label>What memes or posts have caused damage to your social media reputation? 😱 (select all + add your own!)</label>
     <div class="checkbox-group" id="memeCheckboxes">
-      <label><input type="checkbox" name="memeDamage" value="Yes, I was the target">😂 Yes, I was the target</label>
-      <label><input type="checkbox" name="memeDamage" value="Passive aggressive memes">📤 Yes, and they were passive-aggressively sent to me</label>
-      <label><input type="checkbox" name="memeDamage" value="No meme damage">📵 No meme damage detected… this time</label>
+      <label><input type="checkbox" name="memes" value="Awkward tagged photo">📸 Awkward tagged photo</label>
+      <label><input type="checkbox" name="memes" value="Embarrassing status update">📝 Embarrassing status update</label>
+      <label><input type="checkbox" name="memes" value="Deleted but screenshot exists">📷 Deleted but screenshot exists</label>
+      <label><input type="checkbox" name="memes" value="Funny but humiliating meme">🤣 Funny but humiliating meme</label>
     </div>
-    <input type="text" id="customMemeDamage" class="custom-option-input" placeholder="Add your own meme damage here..." />
+    <input type="text" id="customMemeDamage" class="custom-option-input" placeholder="Add your own meme damage" />
 
-    <label>Rate the level of petty behavior witnessed this week 😤 (0 = Angel, 10 = Absolute menace)</label>
-    <div class="range-group">
-      <input type="range" id="pettyLevel" min="0" max="10" value="5">
-    </div>
-
-    <label>Do you wish to receive emotional compensation? 🧾 (select all that apply + add your own!)</label>
+    <label>What kind of compensation do you expect? 💸 (select all that apply + add your own!)</label>
     <div class="checkbox-group" id="compensationCheckboxes">
-      <label><input type="checkbox" name="compensations" value="Pizza">🍕 In pizza form</label>
-      <label><input type="checkbox" name="compensations" value="Gift or apology letter">🛍️ Gift or apology letter preferred</label>
-      <label><input type="checkbox" name="compensations" value="Monetary refund">💸 Monetary refund for emotional damage</label>
-      <label><input type="checkbox" name="compensations" value="Peace and space">😶 Just some peace and space</label>
+      <label><input type="checkbox" name="compensations" value="Dinner date">🍽️ Dinner date</label>
+      <label><input type="checkbox" name="compensations" value="Spa day">💆 Spa day</label>
+      <label><input type="checkbox" name="compensations" value="Movie night">🎬 Movie night</label>
+      <label><input type="checkbox" name="compensations" value="Apology note">📝 Apology note</label>
+      <label><input type="checkbox" name="compensations" value="Chore takeover">🧹 Chore takeover</label>
     </div>
-    <input type="text" id="customCompensation" class="custom-option-input" placeholder="Add your own compensation here..." />
+    <input type="text" id="customCompensation" class="custom-option-input" placeholder="Add your own compensation idea" />
 
-    <label>Want to yell into the void? 🗣️ Drop your rant below:</label>
-    <div class="text-group">
-      <textarea id="rantText" placeholder="Go ahead. Let it all out..."></textarea>
+    <label>Rate your petty behavior level (0 = Zen, 10 = Nuclear)</label>
+    <div class="range-group">
+      <input type="range" id="pettyLevel" min="0" max="10" value="0" />
+      <span id="pettyValue">0</span>/10
     </div>
 
-    <button type="submit">Submit Grievance 🔥</button>
+    <label>Rant your heart out! 🔥 (optional)</label>
+    <textarea id="rantText" placeholder="Write your rant here..."></textarea>
+
+    <button type="submit">Submit Grievance</button>
   </form>
-
-  <audio id="rageSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" preload="auto"></audio>
 
   <script>
     const rageBar = document.getElementById('rageBar');
     const rageLabel = document.getElementById('rageLabel');
-    const pettyLevelInput = document.getElementById('pettyLevel');
     const fireAnimation = document.getElementById('fireAnimation');
-    const rageSound = document.getElementById('rageSound');
-
-    // Update rage bar color based on level
-    function updateRageBar(value) {
-      rageBar.style.width = value + '%';
-      rageLabel.textContent = `Rage Level: ${value}%`;
-
-      // Color gradient from green to red
-      if (value < 25) {
-        rageBar.style.backgroundColor = '#4caf50'; // green
-        rageBar.style.boxShadow = '0 0 10px #4caf50';
-      } else if (value < 50) {
-        rageBar.style.backgroundColor = '#ffeb3b'; // yellow
-        rageBar.style.boxShadow = '0 0 10px #ffeb3b';
-      } else if (value < 75) {
-        rageBar.style.backgroundColor = '#ff9800'; // orange
-        rageBar.style.boxShadow = '0 0 15px #ff9800';
-      } else {
-        rageBar.style.backgroundColor = '#f44336'; // red
-        rageBar.style.boxShadow = '0 0 20px #f44336';
-      }
-
-      // Fire animation & sound at 100%
-      if (value >= 100) {
-        fireAnimation.style.opacity = '1';
-        if (rageSound.paused) {
-          rageSound.play();
-        }
-      } else {
-        fireAnimation.style.opacity = '0';
-        rageSound.pause();
-        rageSound.currentTime = 0;
-      }
-    }
-
-    // Initial rage bar set
-    updateRageBar(pettyLevelInput.value * 10);
+    const pettyLevelInput = document.getElementById('pettyLevel');
+    const pettyValue = document.getElementById('pettyValue');
 
     pettyLevelInput.addEventListener('input', () => {
-      updateRageBar(pettyLevelInput.value * 10);
+      pettyValue.textContent = pettyLevelInput.value;
+      updateRageBar(calculateRageLevel());
     });
 
-    // Add custom option on enter in custom input fields for checkboxes
-    function setupCustomInput(customInputId, containerId, nameAttr) {
-      const input = document.getElementById(customInputId);
-      const container = document.getElementById(containerId);
+    // Update rage bar and fire animation
+    function updateRageBar(rage) {
+      rageBar.style.width = rage + '%';
+      rageLabel.textContent = `Rage Level: ${rage}%`;
 
-      input.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && input.value.trim() !== '') {
-          e.preventDefault();
-
-          const val = input.value.trim();
-          const idSafe = val.toLowerCase().replace(/\W+/g, '-');
-
-          // Check if option already exists
-          if ([...container.querySelectorAll('input')].some(i => i.value.toLowerCase() === val.toLowerCase())) {
-            alert('This option already exists!');
-            input.value = '';
-            return;
-          }
-
-          const label = document.createElement('label');
-          label.style.marginTop = '5px';
-          const checkbox = document.createElement('input');
-          checkbox.type = 'checkbox';
-          checkbox.name = nameAttr;
-          checkbox.value = val;
-          checkbox.checked = true;
-          label.appendChild(checkbox);
-          label.appendChild(document.createTextNode(' ' + val));
-          container.appendChild(label);
-
-          input.value = '';
-        }
-      });
+      if (rage >= 100) {
+        rageBar.style.background = 'linear-gradient(to right, #ff0000, #ff8800)';
+        rageBar.style.boxShadow = '0 0 20px 5px #ff6600';
+        fireAnimation.style.opacity = '1';
+        playAlarmSound();
+      } else if (rage >= 75) {
+        rageBar.style.background = 'linear-gradient(to right, #ff4500, #ff8c00)';
+        rageBar.style.boxShadow = '0 0 15px 4px #ff5a00';
+        fireAnimation.style.opacity = '0';
+        stopAlarmSound();
+      } else if (rage >= 50) {
+        rageBar.style.background = 'linear-gradient(to right, #ff6347, #ffa07a)';
+        rageBar.style.boxShadow = '0 0 10px 3px #ff7f50';
+        fireAnimation.style.opacity = '0';
+        stopAlarmSound();
+      } else {
+        rageBar.style.background = 'linear-gradient(to right, #f44336, #ff1744)';
+        rageBar.style.boxShadow = '0 0 10px #ff1744';
+        fireAnimation.style.opacity = '0';
+        stopAlarmSound();
+      }
     }
 
-    setupCustomInput('customGrievance', 'grievanceCheckboxes', 'grievances');
-    setupCustomInput('customCancellation', 'cancelCheckboxes', 'cancellations');
-    setupCustomInput('customMemeDamage', 'memeCheckboxes', 'memeDamage');
-    setupCustomInput('customCompensation', 'compensationCheckboxes', 'compensations');
+    // Sound alarm setup
+    let alarmAudio = null;
 
-    document.getElementById('grievanceForm').addEventListener('submit', e => {
+    function playAlarmSound() {
+      if (!alarmAudio) {
+        alarmAudio = new Audio('https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg');
+        alarmAudio.loop = true;
+      }
+      if (alarmAudio.paused) {
+        alarmAudio.play();
+      }
+    }
+
+    function stopAlarmSound() {
+      if (alarmAudio && !alarmAudio.paused) {
+        alarmAudio.pause();
+        alarmAudio.currentTime = 0;
+      }
+    }
+
+    // Utility: get all checked values + custom text (if any)
+    function getCheckedValuesAndCustom(checkboxGroupId, customInputId) {
+      const checked = Array.from(document.querySelectorAll(`#${checkboxGroupId} input[type="checkbox"]:checked`)).map(cb => cb.value);
+      const custom = document.getElementById(customInputId).value.trim();
+      if (custom) checked.push(custom);
+      return checked;
+    }
+
+    // Calculate rage level based on grievances count + petty level
+    function calculateRageLevel() {
+      const grievances = getCheckedValuesAndCustom('grievanceCheckboxes', 'customGrievance');
+      const cancellations = getCheckedValuesAndCustom('cancelCheckboxes', 'customCancellation');
+      const memeDamage = getCheckedValuesAndCustom('memeCheckboxes', 'customMemeDamage');
+      const compensations = getCheckedValuesAndCustom('compensationCheckboxes', 'customCompensation');
+      const pettyLevel = Number(pettyLevelInput.value);
+
+      // Simple formula:
+      // Rage base = number of grievances + cancellations + meme damage + compensations
+      // Rage adjusted by pettyLevel out of 10 (multiplier)
+      let baseRage = grievances.length + cancellations.length + memeDamage.length + compensations.length;
+      let rage = Math.min(100, (baseRage * 10) + (pettyLevel * 5)); // cap at 100%
+
+      return rage;
+    }
+
+    // On form submission
+    document.getElementById('grievanceForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      // Collect checked values + text inputs
-      function getCheckedValues(name) {
-        return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(cb => cb.value);
-      }
+      const nameSelect = this.querySelector('select[name="Username"]');
+      const username = nameSelect.value || 'Anonymous';
 
-      const grievances = getCheckedValues('grievances');
-      const cancellations = getCheckedValues('cancellations');
-      const memeDamage = getCheckedValues('memeDamage');
-      const compensations = getCheckedValues('compensations');
+      const grievances = getCheckedValuesAndCustom('grievanceCheckboxes', 'customGrievance');
+      const cancellations = getCheckedValuesAndCustom('cancelCheckboxes', 'customCancellation');
+      const memeDamage = getCheckedValuesAndCustom('memeCheckboxes', 'customMemeDamage');
+      const compensations = getCheckedValuesAndCustom('compensationCheckboxes', 'customCompensation');
       const pettyLevel = pettyLevelInput.value;
       const rant = document.getElementById('rantText').value.trim();
 
-      const result = {
-        grievances,
-        cancellations,
-        memeDamage,
-        compensations,
-        pettyLevel,
-        rant
-      };
+      const rageLevel = calculateRageLevel();
 
-      alert('Grievance Submitted! See console for details.');
+      // Show rage meter update
+      updateRageBar(rageLevel);
 
-      console.log('Submitted Grievance Data:', result);
+      // Build summary message
+      let message = `Grievance submitted by: ${username}\n\n`;
+      message += `Grievances: ${grievances.join(', ') || 'None'}\n`;
+      message += `Cancellations: ${cancellations.join(', ') || 'None'}\n`;
+      message += `Meme Damage: ${memeDamage.join(', ') || 'None'}\n`;
+      message += `Desired Compensation: ${compensations.join(', ') || 'None'}\n`;
+      message += `Petty Behavior Level: ${pettyLevel}/10\n\n`;
+      message += `Rant:\n${rant || 'No rant provided.'}`;
+
+      alert(message);
+
+      // Optionally reset form
+      // this.reset();
+      // updateRageBar(0);
     });
+
   </script>
 </body>
 </html>
