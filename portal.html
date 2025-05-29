@@ -6,13 +6,13 @@
   <title>🔥 Angry Grievance Portal + Rage Meter 🔥</title>
   <style>
     body {
-      background-image: url('https://raw.githubusercontent.com/avig007/gf_grievance_portal/6dc28ca896a26675381de6b3a73833c604ccbca4/IMG_1146%20(1).JPG');
+      background-image: url('https://raw.githubusercontent.com/avig007/gf_grievance_portal/1eec250dbc02a167909c7238744bfdee4c3dfa73/IMG_1141%20(1).JPG');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
-      color: #f44336;
-      font-family: 'Courier New', Courier, monospace;
+      color: #f44336; /* Main text color */
+      font-family: Garamond, serif; /* Default font for body - CHANGED */
       padding: 20px;
       backdrop-filter: brightness(0.6);
     }
@@ -24,44 +24,93 @@
       text-transform: uppercase;
       border-bottom: 2px solid #f44336;
       padding-bottom: 10px;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(100, 20, 20, 0.65); /* Darker, semi-transparent red */
+      color: #ffffff; /* White text for H1 for better contrast */
+      text-shadow: 1px 1px 2px #000000; /* Slight shadow for H1 text */
+      font-family: 'Georgia', serif; /* Classy font for title */
     }
 
-    label {
+    /* Styling for the main question labels */
+    form > label { /* Targets direct children labels of the form - the main questions */
       display: block;
       margin-top: 20px;
-      font-size: 1.1em;
+      font-size: 1.2em; /* Slightly larger font for questions */
       font-weight: bold;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 5px;
+      background-color: rgba(100, 0, 0, 0.55); /* Dark, semi-transparent red */
+      padding: 8px 10px; /* Adjusted padding */
+      font-family: 'Georgia', serif; /* New font for questions */
+      color: #F0F8FF; /* AliceBlue for question text for contrast */
+      border-left: 3px solid #f44336; /* Accent border */
+      border-radius: 4px;
     }
+
+    /* Styling for labels within checkbox groups (the options) */
+    .checkbox-group label {
+      display: block;
+      margin-top: 5px; /* Reduced margin for options */
+      font-size: 1em; /* Reset font size for options */
+      font-weight: bold; /* CHANGED - Made options bold */
+      background-color: transparent; /* No background for option labels */
+      padding: 3px;
+      font-family: Garamond, serif; /* Keep Garamond for options - CHANGED */
+      color: #FF7F50; /* Coral (reddish-orange) for options for contrast - CHANGED */
+      border-left: none; /* No accent border for options */
+      border-radius: 0;
+    }
+    
+    /* Special label for "Your Name" as it's not a main question label */
+    .question > label {
+      display: block;
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      background-color: rgba(100, 0, 0, 0.55);
+      padding: 8px 10px;
+      font-family: 'Georgia', serif; /* New font for questions */
+      color: #F0F8FF; /* AliceBlue for question text for contrast */
+      border-left: 3px solid #f44336;
+      border-radius: 4px;
+    }
+
 
     .checkbox-group, .text-group, .range-group {
       margin-left: 25px;
       margin-top: 10px;
+      padding: 10px;
+      background-color: rgba(0,0,0,0.1); /* Very subtle background for grouping */
+      border-radius: 4px;
     }
 
     input[type="checkbox"] {
       margin-right: 8px;
+      accent-color: #f44336; /* Make checkbox color match theme */
     }
 
     textarea {
       width: 90%;
       height: 100px;
-      background-color: #2a2a2a;
-      color: #f44336;
+      background-color: #3a3030; /* Dark, slightly reddish-grey */
+      color: #f4c2c2; /* Lighter red/pink for text input */
       border: 1px solid #f44336;
       padding: 10px;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: Garamond, serif; /* CHANGED */
       resize: vertical;
+      margin-left: 25px; 
+      border-radius: 3px;
     }
 
     input[type="range"] {
       width: 80%;
+      accent-color: #f44336; /* Make range slider color match theme */
+    }
+     .range-group span { /* Style for the petty level value display */
+        color: #fdd835; /* Yellowish color for emphasis */
+        font-weight: bold;
     }
 
-    button {
-      margin-top: 30px;
+
+    button[type="submit"] { 
+      margin-top: 30px; 
       padding: 12px 24px;
       font-size: 1em;
       background-color: #f44336;
@@ -72,10 +121,19 @@
       margin-left: auto;
       margin-right: auto;
       font-weight: bold;
+      border-radius: 5px; 
+      transition: background-color 0.3s ease;
+      font-family: 'Georgia', serif; /* Classy font for button */
     }
 
-    button:hover {
+    button[type="submit"]:hover {
       background-color: #ff6659;
+    }
+
+    button[type="submit"]:disabled { 
+        background-color: #cccccc;
+        color: #666666;
+        cursor: not-allowed;
     }
 
     a {
@@ -83,15 +141,10 @@
       text-decoration: underline;
     }
 
-    #uploadLinkContainer label {
-      background-color: transparent;
-      color: #aaffaa;
-    }
-
     /* Rage Meter styles */
     .rage-container {
-      margin-bottom: 30px;
-      background-color: #333;
+      margin-top: 30px; 
+      background-color: #452020; /* Dark, reddish-grey */
       border: 2px solid #f44336;
       border-radius: 10px;
       overflow: hidden;
@@ -115,12 +168,14 @@
       position: absolute;
       width: 100%;
       text-align: center;
-      top: 3px;
+      top: 3px; 
+      line-height: 24px; 
       color: #fff;
       font-size: 14px;
       font-weight: bold;
       pointer-events: none;
       text-shadow: 0 0 5px #ff0000;
+      font-family: 'Georgia', serif; /* Consistent classy font */
     }
 
     /* Fire animation container */
@@ -140,48 +195,118 @@
     /* Flames */
     @keyframes flicker {
       0%, 100% { transform: scale(1) translateX(0); opacity: 1; }
-      50% { transform: scale(1.05) translateX(2px); opacity: 0.8; }
+      50% { transform: scale(1.05) translateX(2px) translateY(-2px); opacity: 0.8; } 
     }
 
     .flame {
       position: absolute;
       bottom: 0;
-      width: 20px;
+      width: 20px; 
       height: 50px;
-      background: radial-gradient(circle at 50% 100%, #ff3c00, transparent 70%);
-      border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+      background: radial-gradient(ellipse at 50% 100%, #ff3c00, #ff6a00 30%, transparent 70%); 
+      border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%; 
       animation: flicker 0.7s infinite ease-in-out;
-      filter: drop-shadow(0 0 10px #ff3c00);
+      filter: drop-shadow(0 0 10px #ff3c00) blur(1px); 
     }
 
-    .flame:nth-child(1) { left: 15px; animation-delay: 0s; height: 40px;}
-    .flame:nth-child(2) { left: 45px; animation-delay: 0.2s; height: 55px;}
-    .flame:nth-child(3) { left: 75px; animation-delay: 0.4s; height: 50px;}
-    .flame:nth-child(4) { left: 105px; animation-delay: 0.3s; height: 45px;}
+    .flame:nth-child(1) { left: 15px; animation-delay: 0s; height: 40px; opacity: 0.9;}
+    .flame:nth-child(2) { left: 45px; animation-delay: 0.2s; height: 55px; opacity: 1;}
+    .flame:nth-child(3) { left: 75px; animation-delay: 0.4s; height: 50px; opacity: 0.8;}
+    .flame:nth-child(4) { left: 105px; animation-delay: 0.3s; height: 45px; opacity: 0.95;}
 
     /* Custom input style */
     .custom-option-input {
       margin-top: 5px;
-      margin-left: 25px;
-      width: 80%;
-      background-color: #2a2a2a;
+      margin-left: 25px; 
+      width: calc(100% - 30px); 
+      background-color: #3a3030; 
       border: 1px solid #f44336;
-      color: #f44336;
-      padding: 5px;
-      font-family: 'Courier New', Courier, monospace;
+      color: #f4c2c2; 
+      padding: 8px; 
+      font-family: Garamond, serif; /* CHANGED */
       font-size: 0.9em;
       border-radius: 3px;
+    }
+
+    /* Style for the select dropdown to better match the theme */
+    select[name="Username"] {
+        background-color: #3a3030; 
+        color: #f4c2c2; 
+        border: 1px solid #f44336;
+        padding: 8px;
+        font-family: Garamond, serif; /* CHANGED */
+        font-size: 1em;
+        border-radius: 3px;
+        margin-left: 10px; 
+        margin-top: 5px;
+    }
+    
+    /* Simple Modal for messages */
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 10000; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgba(0,0,0,0.7); 
+    }
+    .modal-content {
+        background-color: #382525; 
+        color: #F0F8FF; /* AliceBlue for modal text for consistency with questions */
+        margin: 15% auto; 
+        padding: 25px;
+        border: 2px solid #f44336;
+        width: 80%; 
+        max-width: 500px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 0 20px #f44336; 
+        font-family: 'Georgia', serif; /* Classy font for modal */
+    }
+    .modal-content p {
+        white-space: pre-wrap; 
+        margin-bottom: 20px;
+        font-size: 1.1em;
+        line-height: 1.6;
+    }
+    .close-button {
+        color: #F0F8FF; /* Match modal text color */
+        float: right;
+        font-size: 32px; 
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+    }
+    .close-button:hover,
+    .close-button:focus {
+        color: #ffffff; 
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .modal-button {
+        background-color: #f44336;
+        color: white;
+        padding: 12px 25px; 
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        font-family: 'Georgia', serif; /* Classy font for modal button */
+    }
+    .modal-button:hover {
+        background-color: #ff6659;
     }
 
   </style>
 </head>
 <body>
   <h1>😠 Angry Grievance Portal 😠</h1>
-
-  <div class="rage-container">
-    <div class="rage-bar" id="rageBar"></div>
-    <div class="rage-label" id="rageLabel">Rage Level: 0%</div>
-  </div>
 
   <div id="fireAnimation" aria-hidden="true">
     <div class="flame"></div>
@@ -190,16 +315,15 @@
     <div class="flame"></div>
   </div>
 
-  <div class="question">
-    <label>Your Name</label>
-    <select name="Username">
-      <option value="">❤️</option>
-      <option value="AVI">AVI💪</option>
-      <option value="SHARINI">👙👠SHARINI💅🌸</option>
-    </select>
-  </div>
-  
   <form id="grievanceForm">
+    <div class="question"> <label for="usernameSelect">Your Name</label> 
+      <select name="Username" id="usernameSelect">
+        <option value="">❤️</option>
+        <option value="AVI">AVI💪</option>
+        <option value="SHARINI">👙👠SHARINI💅🌸</option>
+      </select>
+    </div>
+  
     <label>What made you irritated lately with your partner? 🤬 (select all that apply + add your own!)</label>
     <div class="checkbox-group" id="grievanceCheckboxes">
       <label><input type="checkbox" name="grievances" value="Ignoring texts and calls">📵 Ignoring texts and calls</label>
@@ -215,7 +339,7 @@
       <label><input type="checkbox" name="grievances" value="Dishes stayed in sink">🍽️ Dishes stayed in sink long enough to gain consciousness</label>
       <label><input type="checkbox" name="grievances" value="Saying 'I'm fine' when not">📢 Saying "I'm fine" when clearly NOT fine</label>
     </div>
-    <input type="text" id="customGrievance" class="custom-option-input" placeholder="Add your own grievance here" />
+    <input type="text" id="customGrievance" class="custom-option-input" placeholder="Add your own grievance here" aria-label="Custom grievance"/>
 
     <label>What canceled plans or surprises ruined your mood? 🤡 (select all that apply + add your own!)</label>
     <div class="checkbox-group" id="cancelCheckboxes">
@@ -224,7 +348,7 @@
       <label><input type="checkbox" name="cancellations" value="Ignoring birthday wishes">🎂 Ignoring birthday wishes</label>
       <label><input type="checkbox" name="cancellations" value="Spoiled surprise party">🎈 Spoiled surprise party</label>
     </div>
-    <input type="text" id="customCancellation" class="custom-option-input" placeholder="Add your own canceled plan or surprise" />
+    <input type="text" id="customCancellation" class="custom-option-input" placeholder="Add your own canceled plan or surprise" aria-label="Custom cancellation"/>
 
     <label>What memes or posts have caused damage to your social media reputation? 😱 (select all + add your own!)</label>
     <div class="checkbox-group" id="memeCheckboxes">
@@ -233,7 +357,7 @@
       <label><input type="checkbox" name="memes" value="Deleted but screenshot exists">📷 Deleted but screenshot exists</label>
       <label><input type="checkbox" name="memes" value="Funny but humiliating meme">🤣 Funny but humiliating meme</label>
     </div>
-    <input type="text" id="customMemeDamage" class="custom-option-input" placeholder="Add your own meme damage" />
+    <input type="text" id="customMemeDamage" class="custom-option-input" placeholder="Add your own meme damage" aria-label="Custom meme damage"/>
 
     <label>What kind of compensation do you expect? 💸 (select all that apply + add your own!)</label>
     <div class="checkbox-group" id="compensationCheckboxes">
@@ -243,70 +367,119 @@
       <label><input type="checkbox" name="compensations" value="Apology note">📝 Apology note</label>
       <label><input type="checkbox" name="compensations" value="Chore takeover">🧹 Chore takeover</label>
     </div>
-    <input type="text" id="customCompensation" class="custom-option-input" placeholder="Add your own compensation idea" />
+    <input type="text" id="customCompensation" class="custom-option-input" placeholder="Add your own compensation idea" aria-label="Custom compensation"/>
 
-    <label>Rate your petty behavior level (0 = Zen, 10 = Nuclear)</label>
+    <label for="pettyLevel">Rate your petty behavior level (0 = Zen, 10 = Nuclear)</label> 
     <div class="range-group">
       <input type="range" id="pettyLevel" min="0" max="10" value="0" />
       <span id="pettyValue">0</span>/10
     </div>
 
-    <label>Rant your heart out! 🔥 (optional)</label>
+    <label for="rantText">Rant your heart out! 🔥 (optional)</label> 
     <textarea id="rantText" placeholder="Write your rant here..."></textarea>
+
+    <div class="rage-container">
+      <div class="rage-bar" id="rageBar"></div>
+      <div class="rage-label" id="rageLabel">Rage Level: 0%</div>
+    </div>
 
     <button type="submit">Submit Grievance</button>
   </form>
 
+  <div id="messageModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closeModalButton">&times;</span>
+      <p id="modalMessageText"></p>
+      <button id="modalOkButton" class="modal-button">OK</button>
+    </div>
+  </div>
+
   <script>
+    // DOM Elements
     const rageBar = document.getElementById('rageBar');
     const rageLabel = document.getElementById('rageLabel');
     const fireAnimation = document.getElementById('fireAnimation');
     const pettyLevelInput = document.getElementById('pettyLevel');
     const pettyValue = document.getElementById('pettyValue');
+    const grievanceForm = document.getElementById('grievanceForm');
+    
+    // Modal elements
+    const messageModal = document.getElementById('messageModal');
+    const modalMessageText = document.getElementById('modalMessageText');
+    const closeModalButton = document.getElementById('closeModalButton');
+    const modalOkButton = document.getElementById('modalOkButton');
 
-    pettyLevelInput.addEventListener('input', () => {
-      pettyValue.textContent = pettyLevelInput.value;
-      updateRageBar(calculateRageLevel());
-    });
+    // --- Modal Functions ---
+    function showModal(message) {
+        modalMessageText.textContent = message;
+        messageModal.style.display = "block";
+    }
 
-    // Update rage bar and fire animation
+    function closeModal() {
+        messageModal.style.display = "none";
+    }
+
+    if(closeModalButton) closeModalButton.onclick = closeModal;
+    if(modalOkButton) modalOkButton.onclick = closeModal;
+    
+    window.onclick = function(event) {
+        if (event.target == messageModal) {
+            closeModal();
+        }
+    }
+
+    // --- Rage Meter and Petty Level ---
+    if (pettyLevelInput) {
+        pettyLevelInput.addEventListener('input', () => {
+            if(pettyValue) pettyValue.textContent = pettyLevelInput.value;
+            updateRageBar(calculateRageLevel());
+        });
+    }
+
     function updateRageBar(rage) {
+      if (!rageBar || !rageLabel) return; 
+      rage = Math.max(0, Math.min(100, rage)); 
+
       rageBar.style.width = rage + '%';
       rageLabel.textContent = `Rage Level: ${rage}%`;
 
       if (rage >= 100) {
         rageBar.style.background = 'linear-gradient(to right, #ff0000, #ff8800)';
         rageBar.style.boxShadow = '0 0 20px 5px #ff6600';
-        fireAnimation.style.opacity = '1';
+        if (fireAnimation) fireAnimation.style.opacity = '1';
         playAlarmSound();
       } else if (rage >= 75) {
         rageBar.style.background = 'linear-gradient(to right, #ff4500, #ff8c00)';
         rageBar.style.boxShadow = '0 0 15px 4px #ff5a00';
-        fireAnimation.style.opacity = '0';
+        if (fireAnimation) fireAnimation.style.opacity = '0';
         stopAlarmSound();
       } else if (rage >= 50) {
         rageBar.style.background = 'linear-gradient(to right, #ff6347, #ffa07a)';
         rageBar.style.boxShadow = '0 0 10px 3px #ff7f50';
-        fireAnimation.style.opacity = '0';
+        if (fireAnimation) fireAnimation.style.opacity = '0';
         stopAlarmSound();
       } else {
         rageBar.style.background = 'linear-gradient(to right, #f44336, #ff1744)';
         rageBar.style.boxShadow = '0 0 10px #ff1744';
-        fireAnimation.style.opacity = '0';
+        if (fireAnimation) fireAnimation.style.opacity = '0';
         stopAlarmSound();
       }
     }
 
-    // Sound alarm setup
+    // --- Sound Alarm ---
     let alarmAudio = null;
-
     function playAlarmSound() {
       if (!alarmAudio) {
-        alarmAudio = new Audio('https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg');
-        alarmAudio.loop = true;
+        try {
+            alarmAudio = new Audio('https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg');
+            alarmAudio.loop = true;
+        } catch (e) {
+            console.error("Error creating alarm audio:", e);
+            return; 
+        }
       }
-      if (alarmAudio.paused) {
-        alarmAudio.play();
+      if (alarmAudio && alarmAudio.paused) {
+        alarmAudio.play().catch(error => console.warn("Audio play failed (user interaction might be needed):", error)); 
       }
     }
 
@@ -317,65 +490,103 @@
       }
     }
 
-    // Utility: get all checked values + custom text (if any)
+    // --- Form Data Collection ---
     function getCheckedValuesAndCustom(checkboxGroupId, customInputId) {
-      const checked = Array.from(document.querySelectorAll(`#${checkboxGroupId} input[type="checkbox"]:checked`)).map(cb => cb.value);
-      const custom = document.getElementById(customInputId).value.trim();
-      if (custom) checked.push(custom);
+      const checked = [];
+      const checkboxes = document.querySelectorAll(`#${checkboxGroupId} input[type="checkbox"]:checked`);
+      checkboxes.forEach(cb => checked.push(cb.value));
+      
+      const customInput = document.getElementById(customInputId);
+      if (customInput) { 
+        const custom = customInput.value.trim();
+        if (custom) checked.push(custom);
+      }
       return checked;
     }
 
-    // Calculate rage level based on grievances count + petty level
     function calculateRageLevel() {
       const grievances = getCheckedValuesAndCustom('grievanceCheckboxes', 'customGrievance');
       const cancellations = getCheckedValuesAndCustom('cancelCheckboxes', 'customCancellation');
       const memeDamage = getCheckedValuesAndCustom('memeCheckboxes', 'customMemeDamage');
-      const compensations = getCheckedValuesAndCustom('compensationCheckboxes', 'customCompensation');
-      const pettyLevel = Number(pettyLevelInput.value);
+      
+      const pettyLevel = pettyLevelInput ? Number(pettyLevelInput.value) : 0;
 
-      // Simple formula:
-      // Rage base = number of grievances + cancellations + meme damage + compensations
-      // Rage adjusted by pettyLevel out of 10 (multiplier)
-      let baseRage = grievances.length + cancellations.length + memeDamage.length + compensations.length;
-      let rage = Math.min(100, (baseRage * 10) + (pettyLevel * 5)); // cap at 100%
-
+      let baseRage = grievances.length + cancellations.length + memeDamage.length;
+      let rage = Math.min(100, (baseRage * 15) + (pettyLevel * 3)); 
       return rage;
     }
 
-    // On form submission
-    document.getElementById('grievanceForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+    // --- Form Submission ---
+    if (grievanceForm) {
+        grievanceForm.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-      const nameSelect = this.querySelector('select[name="Username"]');
-      const username = nameSelect.value || 'Anonymous';
+            const nameSelect = this.querySelector('select[name="Username"]');
+            const username = nameSelect ? nameSelect.value || 'Anonymous' : 'Anonymous'; 
 
-      const grievances = getCheckedValuesAndCustom('grievanceCheckboxes', 'customGrievance');
-      const cancellations = getCheckedValuesAndCustom('cancelCheckboxes', 'customCancellation');
-      const memeDamage = getCheckedValuesAndCustom('memeCheckboxes', 'customMemeDamage');
-      const compensations = getCheckedValuesAndCustom('compensationCheckboxes', 'customCompensation');
-      const pettyLevel = pettyLevelInput.value;
-      const rant = document.getElementById('rantText').value.trim();
+            const grievances = getCheckedValuesAndCustom('grievanceCheckboxes', 'customGrievance');
+            const cancellations = getCheckedValuesAndCustom('cancelCheckboxes', 'customCancellation');
+            const memeDamage = getCheckedValuesAndCustom('memeCheckboxes', 'customMemeDamage');
+            const compensations = getCheckedValuesAndCustom('compensationCheckboxes', 'customCompensation');
+            
+            const pettyLevel = pettyLevelInput ? pettyLevelInput.value : "0";
+            
+            const rantInput = document.getElementById('rantText');
+            const rant = rantInput ? rantInput.value.trim() : ''; 
 
-      const rageLevel = calculateRageLevel();
+            const rageLevel = calculateRageLevel();
+            updateRageBar(rageLevel); 
 
-      // Show rage meter update
-      updateRageBar(rageLevel);
+            const SCRIPT_URL = "YOUR_DEPLOYED_WEB_APP_URL_HERE"; // ⚠️ Replace!
 
-      // Build summary message
-      let message = `Grievance submitted by: ${username}\n\n`;
-      message += `Grievances: ${grievances.join(', ') || 'None'}\n`;
-      message += `Cancellations: ${cancellations.join(', ') || 'None'}\n`;
-      message += `Meme Damage: ${memeDamage.join(', ') || 'None'}\n`;
-      message += `Desired Compensation: ${compensations.join(', ') || 'None'}\n`;
-      message += `Petty Behavior Level: ${pettyLevel}/10\n\n`;
-      message += `Rant:\n${rant || 'No rant provided.'}`;
+            const formDataForSheet = {
+                Username: username, Grievances: grievances, Cancellations: cancellations,
+                MemeDamage: memeDamage, Compensations: compensations, PettyLevel: pettyLevel,
+                RageLevel: rageLevel, Rant: rant
+            };
 
-      alert(message);
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
 
-      // Optionally reset form
-      // this.reset();
-      // updateRageBar(0);
-    });
+            fetch(SCRIPT_URL, {
+                method: 'POST', mode: 'no-cors', 
+                headers: {'Content-Type': 'text/plain;charset=utf-8'},
+                body: JSON.stringify(formDataForSheet)
+            })
+            .then(() => {
+                let summaryMessage = `Grievance submitted by: ${username}\n\n` +
+                                   `Grievances: ${grievances.join(', ') || 'None'}\n` +
+                                   `Cancellations: ${cancellations.join(', ') || 'None'}\n` +
+                                   `Meme Damage: ${memeDamage.join(', ') || 'None'}\n` +
+                                   `Desired Compensation: ${compensations.join(', ') || 'None'}\n` +
+                                   `Petty Behavior Level: ${pettyLevel}/10\n` +
+                                   `Rage Level: ${rageLevel}%\n\n` +
+                                   `Rant:\n${rant || 'No rant provided.'}\n\n` +
+                                   "Check the Google Sheet to confirm (if set up).";
+                showModal(summaryMessage);
+                // Optionally reset form:
+                // this.reset();
+                // if (pettyValue) pettyValue.textContent = '0'; 
+                // if (pettyLevelInput) pettyLevelInput.value = '0';
+                // updateRageBar(0); 
+            })
+            .catch(error => {
+                console.error('Error submitting grievance to Google Sheet:', error);
+                showModal('Error submitting grievance. Please try again. Check console for details.');
+            })
+            .finally(() => {
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            });
+        });
+    }
+    
+    // Initial rage bar update on load
+    if (typeof calculateRageLevel === 'function') { 
+        updateRageBar(calculateRageLevel());
+    }
 
   </script>
 </body>
