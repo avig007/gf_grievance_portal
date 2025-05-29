@@ -10,11 +10,13 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
+      background-attachment: fixed; /* Default for desktop */
       color: #f44336; /* Main text color */
-      font-family: Garamond, serif; /* Default font for body - CHANGED */
+      font-family: Garamond, serif; /* Default font for body */
       padding: 20px;
       backdrop-filter: brightness(0.6);
+      margin: 0; /* Ensure no default margin */
+      min-height: 100vh; /* Ensure body takes at least full viewport height */
     }
 
     h1 {
@@ -24,38 +26,39 @@
       text-transform: uppercase;
       border-bottom: 2px solid #f44336;
       padding-bottom: 10px;
-      background-color: rgba(100, 20, 20, 0.65); /* Darker, semi-transparent red */
-      color: #ffffff; /* White text for H1 for better contrast */
-      text-shadow: 1px 1px 2px #000000; /* Slight shadow for H1 text */
-      font-family: 'Georgia', serif; /* Classy font for title */
+      background-color: rgba(100, 20, 20, 0.65); 
+      color: #ffffff; 
+      text-shadow: 1px 1px 2px #000000; 
+      font-family: 'Georgia', serif; 
     }
 
     /* Styling for the main question labels */
-    form > label { /* Targets direct children labels of the form - the main questions */
+    form > label { 
       display: block;
       margin-top: 20px;
-      font-size: 1.2em; /* Slightly larger font for questions */
+      font-size: 1.2em; 
       font-weight: bold;
-      background-color: rgba(100, 0, 0, 0.55); /* Dark, semi-transparent red */
-      padding: 8px 10px; /* Adjusted padding */
-      font-family: 'Georgia', serif; /* New font for questions */
-      color: #F0F8FF; /* AliceBlue for question text for contrast */
-      border-left: 3px solid #f44336; /* Accent border */
+      background-color: rgba(100, 0, 0, 0.55); 
+      padding: 8px 10px; 
+      font-family: 'Georgia', serif; 
+      color: #F0F8FF; 
+      border-left: 3px solid #f44336; 
       border-radius: 4px;
     }
 
     /* Styling for labels within checkbox groups (the options) */
     .checkbox-group label {
       display: block;
-      margin-top: 5px; /* Reduced margin for options */
-      font-size: 1em; /* Reset font size for options */
-      font-weight: bold; /* CHANGED - Made options bold */
-      background-color: transparent; /* No background for option labels */
+      margin-top: 5px; 
+      font-size: 1.1em; /* INCREASED font size for options */
+      font-weight: bold; 
+      background-color: transparent; 
       padding: 3px;
-      font-family: Garamond, serif; /* Keep Garamond for options - CHANGED */
-      color: #FF7F50; /* Coral (reddish-orange) for options for contrast - CHANGED */
-      border-left: none; /* No accent border for options */
+      font-family: Garamond, serif; 
+      color: #FF7F50; /* Coral (reddish-orange) */
+      border-left: none; 
       border-radius: 0;
+      line-height: 1.4; /* Improved line height for readability */
     }
     
     /* Special label for "Your Name" as it's not a main question label */
@@ -66,8 +69,8 @@
       font-weight: bold;
       background-color: rgba(100, 0, 0, 0.55);
       padding: 8px 10px;
-      font-family: 'Georgia', serif; /* New font for questions */
-      color: #F0F8FF; /* AliceBlue for question text for contrast */
+      font-family: 'Georgia', serif; 
+      color: #F0F8FF; 
       border-left: 3px solid #f44336;
       border-radius: 4px;
     }
@@ -77,34 +80,38 @@
       margin-left: 25px;
       margin-top: 10px;
       padding: 10px;
-      background-color: rgba(0,0,0,0.1); /* Very subtle background for grouping */
+      background-color: rgba(0,0,0,0.1); 
       border-radius: 4px;
     }
 
     input[type="checkbox"] {
       margin-right: 8px;
-      accent-color: #f44336; /* Make checkbox color match theme */
+      accent-color: #f44336; 
+      transform: scale(1.1); /* Slightly larger checkboxes */
+      vertical-align: middle;
     }
 
     textarea {
       width: 90%;
+      max-width: calc(100% - 20px); /* Ensure it doesn't overflow padding */
       height: 100px;
-      background-color: #3a3030; /* Dark, slightly reddish-grey */
-      color: #f4c2c2; /* Lighter red/pink for text input */
+      background-color: #3a3030; 
+      color: #f4c2c2; 
       border: 1px solid #f44336;
       padding: 10px;
-      font-family: Garamond, serif; /* CHANGED */
+      font-family: Garamond, serif; 
       resize: vertical;
       margin-left: 25px; 
       border-radius: 3px;
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
     }
 
     input[type="range"] {
       width: 80%;
-      accent-color: #f44336; /* Make range slider color match theme */
+      accent-color: #f44336; 
     }
-     .range-group span { /* Style for the petty level value display */
-        color: #fdd835; /* Yellowish color for emphasis */
+     .range-group span { 
+        color: #fdd835; 
         font-weight: bold;
     }
 
@@ -123,7 +130,7 @@
       font-weight: bold;
       border-radius: 5px; 
       transition: background-color 0.3s ease;
-      font-family: 'Georgia', serif; /* Classy font for button */
+      font-family: 'Georgia', serif; 
     }
 
     button[type="submit"]:hover {
@@ -144,11 +151,12 @@
     /* Rage Meter styles */
     .rage-container {
       margin-top: 30px; 
-      background-color: #452020; /* Dark, reddish-grey */
+      background-color: #452020; 
       border: 2px solid #f44336;
       border-radius: 10px;
       overflow: hidden;
       width: 90%;
+      max-width: 600px; /* Max width for very large screens */
       height: 30px;
       margin-left: auto;
       margin-right: auto;
@@ -175,7 +183,7 @@
       font-weight: bold;
       pointer-events: none;
       text-shadow: 0 0 5px #ff0000;
-      font-family: 'Georgia', serif; /* Consistent classy font */
+      font-family: 'Georgia', serif; 
     }
 
     /* Fire animation container */
@@ -216,16 +224,18 @@
 
     /* Custom input style */
     .custom-option-input {
-      margin-top: 5px;
+      margin-top: 10px; /* Increased margin for better spacing */
       margin-left: 25px; 
-      width: calc(100% - 30px); 
+      width: calc(100% - 50px); /* Adjust width considering group margin */
+      max-width: 100%;
       background-color: #3a3030; 
       border: 1px solid #f44336;
       color: #f4c2c2; 
       padding: 8px; 
-      font-family: Garamond, serif; /* CHANGED */
-      font-size: 0.9em;
+      font-family: Garamond, serif; 
+      font-size: 1em; /* Slightly larger for readability */
       border-radius: 3px;
+      box-sizing: border-box;
     }
 
     /* Style for the select dropdown to better match the theme */
@@ -234,11 +244,14 @@
         color: #f4c2c2; 
         border: 1px solid #f44336;
         padding: 8px;
-        font-family: Garamond, serif; /* CHANGED */
+        font-family: Garamond, serif; 
         font-size: 1em;
         border-radius: 3px;
         margin-left: 10px; 
         margin-top: 5px;
+        display: block; /* Make it block for better control */
+        width: calc(100% - 20px); /* Adjust width */
+        max-width: 300px; /* Max width for select */
     }
     
     /* Simple Modal for messages */
@@ -255,16 +268,17 @@
     }
     .modal-content {
         background-color: #382525; 
-        color: #F0F8FF; /* AliceBlue for modal text for consistency with questions */
+        color: #F0F8FF; 
         margin: 15% auto; 
-        padding: 25px;
+        padding: 20px; /* Adjusted padding */
         border: 2px solid #f44336;
-        width: 80%; 
+        width: 90%; /* More responsive width */
         max-width: 500px;
         border-radius: 10px;
         text-align: center;
         box-shadow: 0 0 20px #f44336; 
-        font-family: 'Georgia', serif; /* Classy font for modal */
+        font-family: 'Georgia', serif; 
+        box-sizing: border-box;
     }
     .modal-content p {
         white-space: pre-wrap; 
@@ -273,13 +287,13 @@
         line-height: 1.6;
     }
     .close-button {
-        color: #F0F8FF; /* Match modal text color */
+        color: #F0F8FF; 
         float: right;
-        font-size: 32px; 
+        font-size: 28px; /* Adjusted size */
         font-weight: bold;
         position: absolute;
         top: 10px;
-        right: 20px;
+        right: 15px; /* Adjusted position */
     }
     .close-button:hover,
     .close-button:focus {
@@ -290,17 +304,95 @@
     .modal-button {
         background-color: #f44336;
         color: white;
-        padding: 12px 25px; 
+        padding: 10px 20px; /* Adjusted padding */
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 1.1em;
+        font-size: 1em; /* Adjusted size */
         font-weight: bold;
         transition: background-color 0.3s ease;
-        font-family: 'Georgia', serif; /* Classy font for modal button */
+        font-family: 'Georgia', serif; 
     }
     .modal-button:hover {
         background-color: #ff6659;
+    }
+
+    /* Mobile Friendliness */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+        background-attachment: scroll; /* Change for mobile */
+      }
+      h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+      }
+      form > label, .question > label {
+        font-size: 1.1em;
+        padding: 6px 8px;
+      }
+      .checkbox-group label {
+        font-size: 1em; /* Adjust if 1.1em is too big on mobile */
+        line-height: 1.3;
+      }
+      .checkbox-group, .text-group, .range-group {
+        margin-left: 10px; /* Reduced indent */
+        padding: 8px;
+      }
+      textarea, .custom-option-input, select[name="Username"] {
+        margin-left: 10px; /* Reduced indent for inputs */
+        width: calc(100% - 20px); /* Ensure full use of space minus padding */
+      }
+      .custom-option-input {
+          width: calc(100% - 20px); /* Ensure custom input is also responsive */
+      }
+      input[type="range"] {
+        width: 90%;
+      }
+      button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 0.95em;
+      }
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 15px;
+      }
+      .modal-content p {
+        font-size: 1em;
+      }
+      .modal-button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      form > label, .question > label {
+        font-size: 1em;
+      }
+      .checkbox-group label {
+        font-size: 0.9em;
+      }
+      .checkbox-group, .text-group, .range-group, textarea, .custom-option-input, select[name="Username"] {
+        margin-left: 5px; /* Further reduce indent */
+         width: calc(100% - 10px);
+      }
+      .custom-option-input {
+          width: calc(100% - 10px);
+      }
+      input[type="checkbox"] {
+        transform: scale(1); /* Reset scale for smaller screens if needed */
+      }
+       .rage-label {
+        font-size: 12px; /* Smaller rage label on small screens */
+      }
     }
 
   </style>
@@ -411,12 +503,12 @@
 
     // --- Modal Functions ---
     function showModal(message) {
-        modalMessageText.textContent = message;
-        messageModal.style.display = "block";
+        if (modalMessageText) modalMessageText.textContent = message;
+        if (messageModal) messageModal.style.display = "block";
     }
 
     function closeModal() {
-        messageModal.style.display = "none";
+        if (messageModal) messageModal.style.display = "none";
     }
 
     if(closeModalButton) closeModalButton.onclick = closeModal;
@@ -547,8 +639,11 @@
 
             const submitButton = this.querySelector('button[type="submit"]');
             const originalButtonText = submitButton.textContent;
-            submitButton.textContent = 'Submitting...';
-            submitButton.disabled = true;
+            if (submitButton) {
+                submitButton.textContent = 'Submitting...';
+                submitButton.disabled = true;
+            }
+
 
             fetch(SCRIPT_URL, {
                 method: 'POST', mode: 'no-cors', 
@@ -577,8 +672,10 @@
                 showModal('Error submitting grievance. Please try again. Check console for details.');
             })
             .finally(() => {
-                submitButton.textContent = originalButtonText;
-                submitButton.disabled = false;
+                 if (submitButton) {
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                }
             });
         });
     }
